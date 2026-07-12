@@ -11,20 +11,20 @@ import lombok.*;
 @Getter
 @Setter
 public class RegisterRequest {
-    @NotBlank(message = "First Name is required")
+    @NotBlank
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
+    @NotBlank
     private String lastName;
 
-    @NotBlank(message = "User Name is required")
+    @NotBlank
     private String username;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
+    @NotBlank
+    @Email
     private String email;
 
-    @NotBlank(message = "Password is required")
+    @NotBlank
     @Size(min = 8, message = "Password must contain at least 8 characters")
     private String password;
 }
