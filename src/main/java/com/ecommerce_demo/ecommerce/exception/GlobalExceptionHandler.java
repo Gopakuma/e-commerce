@@ -69,6 +69,22 @@ public class GlobalExceptionHandler {
                .body(errorResponse);
    }
 
+   @ExceptionHandler(LoginFailedException.class)
+   public ResponseEntity<ErrorResponse> handleLoginFailedException(
+           LoginFailedException ex,
+           HttpServletRequest request) {
+      ErrorResponse errorResponse = ErrorResponse.builder()
+              .timestamp(LocalDateTime.now())
+              .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+              .status(HttpStatus.BAD_REQUEST.value())
+              .message(ex.getMessage())
+              .path(request.getRequestURI())
+              .build();
+
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+              .body(errorResponse);
+   }
+
    @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(
             HttpServletRequest request) {

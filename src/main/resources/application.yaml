@@ -1,12 +1,18 @@
 spring:
   application:
     name: ecommerce
+
   datasource:
     url: jdbc:postgresql://localhost:5432/e-commerce
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
+
   jpa:
-      hibernate:
-        ddl-auto: update
-      show-sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  secret: secretKey123secretKeysecret123KeysecretKey123
+  expiration: 3600000

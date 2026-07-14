@@ -1,9 +1,11 @@
 package com.ecommerce_demo.ecommerce.util;
 
+import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
 public class Util {
 
     private final PasswordEncoder passwordEncoder;
@@ -18,5 +20,9 @@ public class Util {
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
+
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
     }
 }
