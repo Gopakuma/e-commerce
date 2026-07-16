@@ -15,4 +15,5 @@ spring:
 
 jwt:
   secret: secretKey123secretKeysecret123KeysecretKey123
-  expiration: 3600000
+  access_expiration: 900000
+  refresh_expiration: 172800000

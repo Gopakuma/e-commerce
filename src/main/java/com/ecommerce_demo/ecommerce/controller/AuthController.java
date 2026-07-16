@@ -1,8 +1,10 @@
 package com.ecommerce_demo.ecommerce.controller;
 
 import com.ecommerce_demo.ecommerce.dto.request.LoginRequest;
+import com.ecommerce_demo.ecommerce.dto.request.RefreshTokenRequest;
 import com.ecommerce_demo.ecommerce.dto.request.RegisterRequest;
 import com.ecommerce_demo.ecommerce.dto.response.LoginResponse;
+import com.ecommerce_demo.ecommerce.dto.response.RefreshTokenResponse;
 import com.ecommerce_demo.ecommerce.dto.response.RegisterResponse;
 import com.ecommerce_demo.ecommerce.service.impl.AuthServiceImpl;
 import jakarta.validation.Valid;
@@ -28,5 +30,11 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         LoginResponse response = authService.login(loginRequest );
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<RefreshTokenResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        RefreshTokenResponse response = authService.refresh(refreshTokenRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

@@ -1,5 +1,6 @@
 package com.ecommerce_demo.ecommerce.security;
 
+import com.ecommerce_demo.ecommerce.common.enums.TokenType;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,6 +45,11 @@ public class JwtFilter extends OncePerRequestFilter {
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails =
                     customUserDetailsService.loadUserByUsername(username);
+
+            if(jwtService.extractTokenType(jwt) != TokenType.ACCESS){
+                filterChain.doFilter(request, response);
+                return;
+            }
 
             if(jwtService.validateToken(jwt)){
                 UsernamePasswordAuthenticationToken authenticationToken =
