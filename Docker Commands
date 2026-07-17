@@ -1,0 +1,5 @@
+//Build an image
+ sudo docker build --tag=auth-service:latest .
+
+ //Run Docker Compose
+ sudo docker compose up --build
