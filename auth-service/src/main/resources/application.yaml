@@ -1,11 +1,10 @@
 spring:
   application:
-    name: ecommerce
-
+    name: auth-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/e-commerce
-    username: postgres
-    password: root
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ecommerce}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -17,3 +16,26 @@ jwt:
   secret: secretKey123secretKeysecret123KeysecretKey123
   access_expiration: 900000
   refresh_expiration: 172800000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    com.netflix.discovery: DEBUG
+    com.netflix.eureka: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+debug: true

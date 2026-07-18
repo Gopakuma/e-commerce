@@ -1,5 +1,12 @@
-version: '3.8'
 services:
+  eureka-server:
+    image: eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - ecommerce-network
+
   postgres-db:
     image: postgres:15-alpine
     container_name: auth-postgres
@@ -11,6 +18,8 @@ services:
       - POSTGRES_DB=ecommerce
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - ecommerce-network
 
   auth-service:
     image: auth-service:latest
@@ -21,8 +30,21 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecommerce
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8761/" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+networks:
+  ecommerce-network:
+    driver: bridge
 
 volumes:
   pgdata:

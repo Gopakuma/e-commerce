@@ -4,44 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="JWT Token Refresh API">
-      <change afterPath="$PROJECT_DIR$/Docker Commands" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/EcommerceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/common/enums/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/common/enums/TokenType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/dto/request/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/dto/request/RefreshTokenRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/dto/request/RegisterRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/dto/response/LoginResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/dto/response/RefreshTokenResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/dto/response/RegisterResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/exception/ErrorResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/exception/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/exception/LoginFailedException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/exception/RefreshTokenFailedException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/exception/UserAlreadyExistsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/exception/UserRegistrationFailedException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/security/CustomUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/security/JwtFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/security/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/security/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/service/AuthService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/service/impl/AuthServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce_demo/ecommerce/util/Util.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ecommerce_demo/ecommerce/EcommerceApplicationTests.java" beforeDir="false" />
+    <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="Docker setup and containerization">
+      <change afterPath="$PROJECT_DIR$/eureka-server/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/docker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/EcommerceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/EcommerceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,65 +42,65 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000094965567" />
-      <entry key="MS500" value="1.0285070693854101" />
-      <entry key="S2" value="1.8681787613329475" />
-      <entry key="S5" value="3.283881617776664" />
-      <entry key="S10" value="4.96957543171399" />
-      <entry key="S30" value="8.856859842953227" />
-      <entry key="S60" value="13.172719362337322" />
-      <entry key="M2" value="21.52155758213984" />
-      <entry key="M5" value="41.469561589417715" />
-      <entry key="M10" value="62.54942657738223" />
-      <entry key="M15" value="74.69910050593802" />
-      <entry key="M30" value="91.4469889048245" />
-      <entry key="H1" value="102.1951091935189" />
-      <entry key="H2" value="108.31383311570822" />
-      <entry key="H4" value="111.58233399024276" />
-      <entry key="D1" value="114.41970389318344" />
-      <entry key="W1" value="114.91683450818248" />
+      <entry key="MS100" value="1.0000112133378036" />
+      <entry key="MS500" value="1.169501363558814" />
+      <entry key="S2" value="2.0762615157316073" />
+      <entry key="S5" value="2.5609933187359895" />
+      <entry key="S10" value="2.807400302743736" />
+      <entry key="S30" value="4.054636619413326" />
+      <entry key="S60" value="5.896417467149313" />
+      <entry key="M2" value="8.1415081615019" />
+      <entry key="M5" value="12.210488593723792" />
+      <entry key="M10" value="21.003510939843085" />
+      <entry key="M15" value="33.00015054149714" />
+      <entry key="M30" value="73.93854941115877" />
+      <entry key="H1" value="143.0324073742658" />
+      <entry key="H2" value="221.4515715673703" />
+      <entry key="H4" value="284.80365195524" />
+      <entry key="D1" value="357.5998538832439" />
+      <entry key="W1" value="372.44821280913925" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
+      <entry key="S2" value="2.845580036841763E-282" />
+      <entry key="S5" value="2.4082641534452343E-113" />
+      <entry key="S10" value="4.951762513822829E-57" />
+      <entry key="S30" value="2.0695626725449012E-19" />
+      <entry key="S60" value="6.403147687183304E-10" />
+      <entry key="M2" value="4.071217772330411E-5" />
+      <entry key="M5" value="0.03592234121728659" />
+      <entry key="M10" value="0.38721718114564" />
+      <entry key="M15" value="0.9270199402847819" />
+      <entry key="M30" value="2.6602364226537882" />
+      <entry key="H1" value="5.241350694466192" />
+      <entry key="H2" value="7.773792478581322" />
+      <entry key="H4" value="9.610173353255783" />
+      <entry key="D1" value="11.555975270029627" />
+      <entry key="W1" value="11.935338127127567" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.959264128372045" />
-      <entry key="MS500" value="1.0199481359491638" />
-      <entry key="S2" value="1.8637852031187185" />
-      <entry key="S5" value="3.2804347552263935" />
-      <entry key="S10" value="4.966786407896311" />
-      <entry key="S30" value="8.853211492188608" />
-      <entry key="S60" value="13.16646898743715" />
-      <entry key="M2" value="21.514379512171733" />
-      <entry key="M5" value="41.46331206638477" />
-      <entry key="M10" value="62.544343979602836" />
-      <entry key="M15" value="74.69491309586981" />
-      <entry key="M30" value="91.44432792871156" />
-      <entry key="H1" value="102.19359327131575" />
-      <entry key="H2" value="108.31302194153879" />
-      <entry key="H4" value="111.58191413721103" />
-      <entry key="D1" value="114.41963184914769" />
-      <entry key="W1" value="114.9168241643445" />
+      <entry key="MS100" value="0.006533729939927851" />
+      <entry key="MS500" value="0.531124306599521" />
+      <entry key="S2" value="1.84806301613883" />
+      <entry key="S5" value="2.461967183463203" />
+      <entry key="S10" value="2.7564678257802204" />
+      <entry key="S30" value="4.037210843918817" />
+      <entry key="S60" value="5.887527841179524" />
+      <entry key="M2" value="8.13698902987117" />
+      <entry key="M5" value="12.244432120676816" />
+      <entry key="M10" value="21.38933351815678" />
+      <entry key="M15" value="33.92575452776811" />
+      <entry key="M30" value="76.59689316626205" />
+      <entry key="H1" value="148.2715011135699" />
+      <entry key="H2" value="229.22341932510227" />
+      <entry key="H4" value="294.4125150361886" />
+      <entry key="D1" value="369.1555456133451" />
+      <entry key="W1" value="384.38350852927266" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7,
@@ -144,6 +114,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Docker.docker-compose.yaml.auth-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.eureka-server: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.postgres-db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml: Compose Deployment.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -155,6 +128,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "Spring Boot.EcommerceApplication.executor": "Run",
+    "Spring Boot.eureka-server.executor": "Run",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
@@ -180,7 +154,7 @@
       <recent name="$PROJECT_DIR$/auth-service" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yaml.auth-service: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yaml.postgres-db: Compose Deployment">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="e-commerce" />
       <method v="2">
@@ -215,9 +189,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="eureka-server" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-26" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="EurekaServerApplication.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
       </deployment>
       <method v="2" />
     </configuration>
@@ -234,13 +224,46 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yaml.eureka-server: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="eureka-server" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.postgres-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres-db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Docker.docker-compose.yaml.postgres-db: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yaml.eureka-server: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yaml.auth-service: Compose Deployment" />
+      <item itemvalue="Spring Boot.eureka-server" />
       <item itemvalue="Spring Boot.EcommerceApplication" />
       <item itemvalue="Spring Boot.e" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yaml.postgres-db: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.eureka-server: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.auth-service: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -412,6 +435,7 @@
     <MESSAGE value="Global Exception Handler first implementation" />
     <MESSAGE value="Login, Registration API changes and Implementation of JWT Auth" />
     <MESSAGE value="JWT Token Refresh API" />
-    <option name="LAST_COMMIT_MESSAGE" value="JWT Token Refresh API" />
+    <MESSAGE value="Docker setup and containerization" />
+    <option name="LAST_COMMIT_MESSAGE" value="Docker setup and containerization" />
   </component>
 </project>
