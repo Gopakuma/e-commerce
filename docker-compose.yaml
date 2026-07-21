@@ -1,5 +1,6 @@
 services:
   eureka-server:
+    build: ./eureka-server
     image: eureka-server:latest
     container_name: eureka-server
     ports:
@@ -20,24 +21,75 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - ecommerce-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d ecommerce" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  gateway-service:
+    build: ./gateway
+    image: gateway-service:latest
+    container_name: gateway-service
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - ecommerce-network
+    depends_on:
+      eureka-server:
+        condition: service_started
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://eureka-server:8761/" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   auth-service:
+    build: ./auth-service
     image: auth-service:latest
     container_name: ecommerce-auth
     ports:
-      - "8080:8080"
+      - "8081:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecommerce
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root
-      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     healthcheck:
-      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8761/" ]
+      test: [ "CMD", "wget", "--spider", "-q", "http://eureka-server:8761/" ]
       interval: 10s
       timeout: 5s
       retries: 10
     depends_on:
       postgres-db:
+        condition: service_started
+      eureka-server:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+  user-service:
+    build: ./user-service
+    image: user-service:latest
+    container_name: user-service
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecommerce
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://eureka-server:8761/" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      postgres-db:
+        condition: service_started
+      eureka-server:
         condition: service_started
     networks:
       - ecommerce-network

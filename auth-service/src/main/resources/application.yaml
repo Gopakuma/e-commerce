@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: auth-service
@@ -20,7 +23,7 @@ jwt:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
     register-with-eureka: true
     fetch-registry: true
   instance:

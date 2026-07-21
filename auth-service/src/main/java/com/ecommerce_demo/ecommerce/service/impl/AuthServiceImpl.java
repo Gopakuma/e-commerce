@@ -5,9 +5,11 @@ import com.ecommerce_demo.ecommerce.common.enums.TokenType;
 import com.ecommerce_demo.ecommerce.dto.request.LoginRequest;
 import com.ecommerce_demo.ecommerce.dto.request.RefreshTokenRequest;
 import com.ecommerce_demo.ecommerce.dto.request.RegisterRequest;
+import com.ecommerce_demo.ecommerce.dto.request.ValidateTokenRequest;
 import com.ecommerce_demo.ecommerce.dto.response.LoginResponse;
 import com.ecommerce_demo.ecommerce.dto.response.RefreshTokenResponse;
 import com.ecommerce_demo.ecommerce.dto.response.RegisterResponse;
+import com.ecommerce_demo.ecommerce.dto.response.ValidateTokenResponse;
 import com.ecommerce_demo.ecommerce.entity.User;
 import com.ecommerce_demo.ecommerce.exception.LoginFailedException;
 import com.ecommerce_demo.ecommerce.exception.RefreshTokenFailedException;
@@ -61,7 +63,6 @@ public class AuthServiceImpl  implements AuthService {
                 .build();
 
         try{
-            System.out.println("DEBUG REGISTRATION -> Raw: " + registerRequest.getPassword() + " | Encoded: " + newUser.getPassword());
             User createdUser =  userRepository.save(newUser);
             return RegisterResponse.builder()
                     .id(createdUser.getId())
@@ -115,6 +116,19 @@ public class AuthServiceImpl  implements AuthService {
         return RefreshTokenResponse.builder()
                 .refreshToken(refreshToken)
                 .accessToken(accessToken)
+                .build();
+    }
+
+    @Override
+    public ValidateTokenResponse validateJwtToken(ValidateTokenRequest validateTokenRequest) {
+        String token = validateTokenRequest.getToken();
+        if(token == null){
+            return ValidateTokenResponse.builder()
+                    .isValid(false)
+                    .build();
+        }
+        return ValidateTokenResponse.builder()
+                .isValid(jwtService.validateToken(token))
                 .build();
     }
 }

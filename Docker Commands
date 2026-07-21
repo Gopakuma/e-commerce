@@ -1,5 +1,13 @@
 //Build an image
- sudo docker build --tag=auth-service:latest .
+sudo docker build --tag=auth-service:latest .
+sudo docker build --tag=eureka-server:latest .
+sudo docker build --tag=gateway-service:latest .
+
 
  //Run Docker Compose
- sudo docker compose up --build
+sudo docker compose up --build
+
+//Logs
+sudo docker logs eureka-server:latest
+sudo docker logs auth-service:latest
+sudo docker logs gateway-service:latest

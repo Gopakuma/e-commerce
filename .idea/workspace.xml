@@ -4,14 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="Docker setup and containerization">
-      <change afterPath="$PROJECT_DIR$/eureka-server/dockerfile" afterDir="false" />
+    <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="Docker setup and Eureka Service setup">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/dto/request/ValidateTokenRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/dto/response/ValidateTokenResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/GatewayConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/WebClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/controller/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/dto/request/UserDetailsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/dto/response/UserDetailsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/enums/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/exception/InvalidUserException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/docker" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/EcommerceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/EcommerceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker Commands" beforeDir="false" afterPath="$PROJECT_DIR$/Docker Commands" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/impl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/impl/AuthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,61 +57,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000112133378036" />
-      <entry key="MS500" value="1.169501363558814" />
-      <entry key="S2" value="2.0762615157316073" />
-      <entry key="S5" value="2.5609933187359895" />
-      <entry key="S10" value="2.807400302743736" />
-      <entry key="S30" value="4.054636619413326" />
-      <entry key="S60" value="5.896417467149313" />
-      <entry key="M2" value="8.1415081615019" />
-      <entry key="M5" value="12.210488593723792" />
-      <entry key="M10" value="21.003510939843085" />
-      <entry key="M15" value="33.00015054149714" />
-      <entry key="M30" value="73.93854941115877" />
-      <entry key="H1" value="143.0324073742658" />
-      <entry key="H2" value="221.4515715673703" />
-      <entry key="H4" value="284.80365195524" />
-      <entry key="D1" value="357.5998538832439" />
-      <entry key="W1" value="372.44821280913925" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000069334267947" />
+      <entry key="S2" value="1.0519732189003392" />
+      <entry key="S5" value="1.4438286724412688" />
+      <entry key="S10" value="2.509984593465739" />
+      <entry key="S30" value="5.711134053544052" />
+      <entry key="S60" value="8.58439250472629" />
+      <entry key="M2" value="14.735545343594048" />
+      <entry key="M5" value="27.939966976396498" />
+      <entry key="M10" value="39.66399509940719" />
+      <entry key="M15" value="49.24180178611008" />
+      <entry key="M30" value="80.69469336317415" />
+      <entry key="H1" value="153.35791253900794" />
+      <entry key="H2" value="279.11820146745026" />
+      <entry key="H4" value="419.67527760936423" />
+      <entry key="D1" value="627.6519966301812" />
+      <entry key="W1" value="676.4022118615047" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="2.845580036841763E-282" />
-      <entry key="S5" value="2.4082641534452343E-113" />
-      <entry key="S10" value="4.951762513822829E-57" />
-      <entry key="S30" value="2.0695626725449012E-19" />
-      <entry key="S60" value="6.403147687183304E-10" />
-      <entry key="M2" value="4.071217772330411E-5" />
-      <entry key="M5" value="0.03592234121728659" />
-      <entry key="M10" value="0.38721718114564" />
-      <entry key="M15" value="0.9270199402847819" />
-      <entry key="M30" value="2.6602364226537882" />
-      <entry key="H1" value="5.241350694466192" />
-      <entry key="H2" value="7.773792478581322" />
-      <entry key="H4" value="9.610173353255783" />
-      <entry key="D1" value="11.555975270029627" />
-      <entry key="W1" value="11.935338127127567" />
+      <entry key="MS500" value="7.162011785805578E-120" />
+      <entry key="S2" value="2.0317899966021576E-30" />
+      <entry key="S5" value="1.9624045402716064E-12" />
+      <entry key="S10" value="2.204469753868715E-6" />
+      <entry key="S30" value="0.033866017711031135" />
+      <entry key="S60" value="0.45437935796815526" />
+      <entry key="M2" value="1.750919688430205" />
+      <entry key="M5" value="4.003605576622985" />
+      <entry key="M10" value="5.3147932320346625" />
+      <entry key="M15" value="5.956837749289147" />
+      <entry key="M30" value="7.461017278227052" />
+      <entry key="H1" value="10.490945087182746" />
+      <entry key="H2" value="15.280326580772426" />
+      <entry key="H4" value="20.25360683086952" />
+      <entry key="D1" value="27.163499978393244" />
+      <entry key="W1" value="28.726273067663115" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.006533729939927851" />
-      <entry key="MS500" value="0.531124306599521" />
-      <entry key="S2" value="1.84806301613883" />
-      <entry key="S5" value="2.461967183463203" />
-      <entry key="S10" value="2.7564678257802204" />
-      <entry key="S30" value="4.037210843918817" />
-      <entry key="S60" value="5.887527841179524" />
-      <entry key="M2" value="8.13698902987117" />
-      <entry key="M5" value="12.244432120676816" />
-      <entry key="M10" value="21.38933351815678" />
-      <entry key="M15" value="33.92575452776811" />
-      <entry key="M30" value="76.59689316626205" />
-      <entry key="H1" value="148.2715011135699" />
-      <entry key="H2" value="229.22341932510227" />
-      <entry key="H4" value="294.4125150361886" />
-      <entry key="D1" value="369.1555456133451" />
-      <entry key="W1" value="384.38350852927266" />
+      <entry key="MS100" value="0.9862327044933592" />
+      <entry key="MS500" value="0.9972381560034311" />
+      <entry key="S2" value="1.0512264661806994" />
+      <entry key="S5" value="1.4433728644033024" />
+      <entry key="S10" value="2.5095174837336476" />
+      <entry key="S30" value="5.7430907204368005" />
+      <entry key="S60" value="9.027662096696004" />
+      <entry key="M2" value="16.46446424600369" />
+      <entry key="M5" value="31.92298063302185" />
+      <entry key="M10" value="44.96503029527618" />
+      <entry key="M15" value="55.18843438321094" />
+      <entry key="M30" value="88.14958681810104" />
+      <entry key="H1" value="163.84460872624874" />
+      <entry key="H2" value="294.3952477742123" />
+      <entry key="H4" value="439.9265604662683" />
+      <entry key="D1" value="654.8149355834081" />
+      <entry key="W1" value="705.1283988952289" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -111,43 +126,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker-compose.yaml.auth-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yaml.eureka-server: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yaml.postgres-db: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yaml: Compose Deployment.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.EcommerceApplication.executor": "Run",
-    "Spring Boot.eureka-server.executor": "Run",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/gopu/GOPU/e-commerce",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.customizations",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yaml.auth-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yaml.eureka-server: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yaml.postgres-db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.EcommerceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.eureka-server.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/gopu/GOPU/e-commerce/gateway&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.customizations&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -436,6 +451,7 @@
     <MESSAGE value="Login, Registration API changes and Implementation of JWT Auth" />
     <MESSAGE value="JWT Token Refresh API" />
     <MESSAGE value="Docker setup and containerization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Docker setup and containerization" />
+    <MESSAGE value="Docker setup and Eureka Service setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Docker setup and Eureka Service setup" />
   </component>
 </project>

@@ -3,9 +3,11 @@ package com.ecommerce_demo.ecommerce.controller;
 import com.ecommerce_demo.ecommerce.dto.request.LoginRequest;
 import com.ecommerce_demo.ecommerce.dto.request.RefreshTokenRequest;
 import com.ecommerce_demo.ecommerce.dto.request.RegisterRequest;
+import com.ecommerce_demo.ecommerce.dto.request.ValidateTokenRequest;
 import com.ecommerce_demo.ecommerce.dto.response.LoginResponse;
 import com.ecommerce_demo.ecommerce.dto.response.RefreshTokenResponse;
 import com.ecommerce_demo.ecommerce.dto.response.RegisterResponse;
+import com.ecommerce_demo.ecommerce.dto.response.ValidateTokenResponse;
 import com.ecommerce_demo.ecommerce.service.impl.AuthServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -36,5 +38,11 @@ public class AuthController {
     public ResponseEntity<RefreshTokenResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest) {
         RefreshTokenResponse response = authService.refresh(refreshTokenRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/validateToken")
+    public Boolean validateToken(@RequestBody ValidateTokenRequest validateTokenRequest){
+        ValidateTokenResponse response = authService.validateJwtToken(validateTokenRequest);
+        return response.isValid();
     }
 }
