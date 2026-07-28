@@ -75,7 +75,7 @@ services:
     image: user-service:latest
     container_name: user-service
     ports:
-      - "8082:8080"
+      - "8082:8081"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecommerce
       - SPRING_DATASOURCE_USERNAME=postgres

@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: auth-service
+
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ecommerce}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
@@ -11,9 +12,10 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   jpa:
+    database: postgresql
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: on
 
 jwt:
   secret: secretKey123secretKeysecret123KeysecretKey123
@@ -41,4 +43,4 @@ logging:
         exposure:
           include: "*"
 
-debug: true
+debug: false

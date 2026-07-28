@@ -19,9 +19,11 @@ import com.ecommerce_demo.ecommerce.repository.UserRepository;
 import com.ecommerce_demo.ecommerce.security.JwtService;
 import com.ecommerce_demo.ecommerce.service.AuthService;
 import com.ecommerce_demo.ecommerce.util.Util;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.UUID;
 
 @Service
 public class AuthServiceImpl  implements AuthService {
@@ -32,16 +34,24 @@ public class AuthServiceImpl  implements AuthService {
 
     private final JwtService jwtService;
 
+    private final WebClient webClient;
+
     @Value("${jwt.access_expiration}")
     private Long access_expiration;
 
     @Value("${jwt.refresh_expiration}")
     private Long refresh_expiration;
 
-    public AuthServiceImpl(UserRepository userRepository, Util util, JwtService jwtService) {
+    public AuthServiceImpl(
+            UserRepository userRepository,
+            Util util,
+            JwtService jwtService,
+            WebClient webClient) {
+
         this.userRepository = userRepository;
         this.util = util;
         this.jwtService = jwtService;
+        this.webClient = webClient;
     }
 
     @Override
@@ -53,7 +63,22 @@ public class AuthServiceImpl  implements AuthService {
             throw new UserAlreadyExistsException("User Name already exist");
         }
 
+        UUID uuid = UUID.randomUUID();
+
+        Boolean uuidStatus = webClient.post()
+                .uri("http://localhost:8080/user/uuid")
+                .bodyValue(uuid)
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .blockOptional()
+                .orElseThrow(() -> new UserRegistrationFailedException("Internal server error"));
+
+        if (!uuidStatus) {
+            throw new UserRegistrationFailedException("Registration failed: The requested UUID is invalid or already taken");
+        }
+
         User newUser = User.builder()
+                .uuid(uuid.toString())
                 .firstName(registerRequest.getFirstName())
                 .lastName(registerRequest.getLastName())
                 .password(util.encodePassword(registerRequest.getPassword()))

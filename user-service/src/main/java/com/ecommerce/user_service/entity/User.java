@@ -14,32 +14,21 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user_profiles")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
     @Column(nullable = false, unique = true)
-    private String username;
+    private String uuid;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    private String city;
 
-    @Column(nullable = false)
-    private String password;
+    private int pincode;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role = Role.CUSTOMER;
-
-    @Column(nullable = false)
-    private boolean enabled = true;
+    private String address;
 
     @CreationTimestamp
     @Column(updatable = false)

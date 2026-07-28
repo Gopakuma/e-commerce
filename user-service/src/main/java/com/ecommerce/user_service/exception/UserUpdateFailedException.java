@@ -1,0 +1,7 @@
+package com.ecommerce.user_service.exception;
+
+public class UserUpdateFailedException extends RuntimeException{
+    public UserUpdateFailedException(String message) {
+        super(message);
+    }
+}

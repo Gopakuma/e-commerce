@@ -5,28 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="Docker setup and Eureka Service setup">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/dto/request/ValidateTokenRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/dto/response/ValidateTokenResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/GatewayConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/WebClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/controller/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/dto/request/UserDetailsRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/dto/response/UserDetailsResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/enums/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/exception/InvalidUserException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/util/WebClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/dto/request/UserDetailsUpdateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/dto/response/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/dto/response/UserDetailsUpdateResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/exception/UserNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/exception/UserUpdateFailedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/security/SwaggerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker Commands" beforeDir="false" afterPath="$PROJECT_DIR$/Docker Commands" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/SwaggerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/impl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/impl/AuthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/controller/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/controller/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/impl/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,60 +59,60 @@
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000069334267947" />
-      <entry key="S2" value="1.0519732189003392" />
-      <entry key="S5" value="1.4438286724412688" />
-      <entry key="S10" value="2.509984593465739" />
-      <entry key="S30" value="5.711134053544052" />
-      <entry key="S60" value="8.58439250472629" />
-      <entry key="M2" value="14.735545343594048" />
-      <entry key="M5" value="27.939966976396498" />
-      <entry key="M10" value="39.66399509940719" />
-      <entry key="M15" value="49.24180178611008" />
-      <entry key="M30" value="80.69469336317415" />
-      <entry key="H1" value="153.35791253900794" />
-      <entry key="H2" value="279.11820146745026" />
-      <entry key="H4" value="419.67527760936423" />
-      <entry key="D1" value="627.6519966301812" />
-      <entry key="W1" value="676.4022118615047" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000178295622983" />
+      <entry key="S60" value="1.0233189009501502" />
+      <entry key="M2" value="1.9775580616096171" />
+      <entry key="M5" value="12.36699701888313" />
+      <entry key="M10" value="29.856370133146353" />
+      <entry key="M15" value="43.51704196602946" />
+      <entry key="M30" value="79.67982747409967" />
+      <entry key="H1" value="154.1077873337724" />
+      <entry key="H2" value="281.97194255280556" />
+      <entry key="H4" value="426.8714342135053" />
+      <entry key="D1" value="644.467032257387" />
+      <entry key="W1" value="695.9118722895269" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="7.162011785805578E-120" />
-      <entry key="S2" value="2.0317899966021576E-30" />
-      <entry key="S5" value="1.9624045402716064E-12" />
-      <entry key="S10" value="2.204469753868715E-6" />
-      <entry key="S30" value="0.033866017711031135" />
-      <entry key="S60" value="0.45437935796815526" />
-      <entry key="M2" value="1.750919688430205" />
-      <entry key="M5" value="4.003605576622985" />
-      <entry key="M10" value="5.3147932320346625" />
-      <entry key="M15" value="5.956837749289147" />
-      <entry key="M30" value="7.461017278227052" />
-      <entry key="H1" value="10.490945087182746" />
-      <entry key="H2" value="15.280326580772426" />
-      <entry key="H4" value="20.25360683086952" />
-      <entry key="D1" value="27.163499978393244" />
-      <entry key="W1" value="28.726273067663115" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="4.5051155794951365E-123" />
+      <entry key="S5" value="1.7026264971725222E-49" />
+      <entry key="S10" value="6.49336130185331E-25" />
+      <entry key="S30" value="2.2533013270440042E-8" />
+      <entry key="S60" value="3.706347744962573E-4" />
+      <entry key="M2" value="0.05000690906333282" />
+      <entry key="M5" value="0.9655100520561627" />
+      <entry key="M10" value="2.6099917247136744" />
+      <entry key="M15" value="3.707811175622225" />
+      <entry key="M30" value="5.88638907912638" />
+      <entry key="H1" value="9.318372629270872" />
+      <entry key="H2" value="14.401090052361965" />
+      <entry key="H4" value="19.66227382380847" />
+      <entry key="D1" value="27.02968315755635" />
+      <entry key="W1" value="28.70601374222578" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9862327044933592" />
-      <entry key="MS500" value="0.9972381560034311" />
-      <entry key="S2" value="1.0512264661806994" />
-      <entry key="S5" value="1.4433728644033024" />
-      <entry key="S10" value="2.5095174837336476" />
-      <entry key="S30" value="5.7430907204368005" />
-      <entry key="S60" value="9.027662096696004" />
-      <entry key="M2" value="16.46446424600369" />
-      <entry key="M5" value="31.92298063302185" />
-      <entry key="M10" value="44.96503029527618" />
-      <entry key="M15" value="55.18843438321094" />
-      <entry key="M30" value="88.14958681810104" />
-      <entry key="H1" value="163.84460872624874" />
-      <entry key="H2" value="294.3952477742123" />
-      <entry key="H4" value="439.9265604662683" />
-      <entry key="D1" value="654.8149355834081" />
-      <entry key="W1" value="705.1283988952289" />
+      <entry key="MS100" value="0.8526348917679567" />
+      <entry key="MS500" value="0.9686181892266277" />
+      <entry key="S2" value="0.9920604931322485" />
+      <entry key="S5" value="0.9968166007640673" />
+      <entry key="S10" value="0.9984070316078845" />
+      <entry key="S30" value="0.9994865627250137" />
+      <entry key="S60" value="1.023405769468887" />
+      <entry key="M2" value="2.026654002495771" />
+      <entry key="M5" value="13.326998303286743" />
+      <entry key="M10" value="32.45908578111445" />
+      <entry key="M15" value="47.21806801358452" />
+      <entry key="M30" value="85.56111406837101" />
+      <entry key="H1" value="163.42223419088833" />
+      <entry key="H2" value="296.36986076627653" />
+      <entry key="H4" value="446.5314106021971" />
+      <entry key="D1" value="671.4961501031543" />
+      <entry key="W1" value="724.6177990471883" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -286,8 +287,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.258" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.8665.258" />
+        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.337" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.8665.337" />
       </set>
     </attachedChunks>
   </component>

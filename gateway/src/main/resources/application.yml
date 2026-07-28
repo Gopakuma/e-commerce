@@ -1,0 +1,72 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY-SERVICE
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service-route
+              uri: lb://auth-service
+              predicates:
+                  - Path=/auth/**
+              filters:
+                  - StripPrefix=1
+
+            - id: auth-service-swagger
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth/v3/api-docs
+              filters:
+                - RewritePath=/auth/v3/api-docs, /v3/api-docs
+
+            - id: user-service-route
+              uri: lb://user-service
+              predicates:
+                  - Path=/user/**
+              filters:
+                   - StripPrefix=1
+
+            - id: user-service-swagger
+              uri: lb://user-service
+              predicates:
+                - Path=/users/v3/api-docs
+              filters:
+                - RewritePath=/users/v3/api-docs, /v3/api-docs
+
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: secretKey123secretKeysecret123KeysecretKey123
+  access_expiration: 900000
+  refresh_expiration: 172800000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.loadbalancer: TRACE
