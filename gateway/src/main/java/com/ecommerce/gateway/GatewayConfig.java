@@ -14,24 +14,11 @@
 //                //Auth Service
 //                .route("auth-service-route", r -> r
 //                        .path("/auth/**")
-//                        .filters(f -> f.stripPrefix(1))
 //                        .uri("lb://auth-service"))
 //
 //                //User Service
 //                .route("user-service-route", r -> r
 //                        .path("/user/**")
-//                        .filters(f-> f.stripPrefix(1))
-//                                .uri("lb://user-service"))
-//
-//                // Combined OpenAPI docs routes for aggregate dropdown menu
-//                .route("auth-openapi-route", r -> r
-//                        .path("/v3/api-docs/auth-service")
-//                        .filters(f -> f.setPath("/v3/api-docs"))
-//                        .uri("lb://auth-service"))
-//
-//                .route("user-openapi-route", r -> r
-//                        .path("/v3/api-docs/user-service")
-//                        .filters(f -> f.setPath("/v3/api-docs"))
 //                        .uri("lb://user-service"))
 //
 //                .build();

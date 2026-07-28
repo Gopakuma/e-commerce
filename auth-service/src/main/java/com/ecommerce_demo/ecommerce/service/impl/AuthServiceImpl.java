@@ -18,6 +18,7 @@ import com.ecommerce_demo.ecommerce.exception.UserRegistrationFailedException;
 import com.ecommerce_demo.ecommerce.repository.UserRepository;
 import com.ecommerce_demo.ecommerce.security.JwtService;
 import com.ecommerce_demo.ecommerce.service.AuthService;
+import com.ecommerce_demo.ecommerce.util.UserServiceClient;
 import com.ecommerce_demo.ecommerce.util.Util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,8 @@ public class AuthServiceImpl  implements AuthService {
 
     private final WebClient webClient;
 
+    private final UserServiceClient userServiceClient;
+
     @Value("${jwt.access_expiration}")
     private Long access_expiration;
 
@@ -46,12 +49,14 @@ public class AuthServiceImpl  implements AuthService {
             UserRepository userRepository,
             Util util,
             JwtService jwtService,
-            WebClient webClient) {
+            WebClient webClient,
+            UserServiceClient userServiceClient) {
 
         this.userRepository = userRepository;
         this.util = util;
         this.jwtService = jwtService;
         this.webClient = webClient;
+        this.userServiceClient = userServiceClient;
     }
 
     @Override
@@ -65,14 +70,8 @@ public class AuthServiceImpl  implements AuthService {
 
         UUID uuid = UUID.randomUUID();
 
-        Boolean uuidStatus = webClient.post()
-                .uri("http://localhost:8080/user/uuid")
-                .bodyValue(uuid)
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .blockOptional()
-                .orElseThrow(() -> new UserRegistrationFailedException("Internal server error"));
-
+        Boolean uuidStatus = userServiceClient.updateUuid(uuid);
+        
         if (!uuidStatus) {
             throw new UserRegistrationFailedException("Registration failed: The requested UUID is invalid or already taken");
         }

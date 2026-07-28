@@ -9,12 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/user")
 public class User {
 
     private UserServiceImpl userService;
 
     public User(UserServiceImpl userService){
         this.userService = userService;
+    }
+
+    @GetMapping("/ping")
+    public String ping() {
+        return "PONG";
     }
 
     @GetMapping("/user/{id}")

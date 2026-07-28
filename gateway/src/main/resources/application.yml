@@ -9,13 +9,6 @@ spring:
       server:
         webflux:
           routes:
-            - id: auth-service-route
-              uri: lb://auth-service
-              predicates:
-                  - Path=/auth/**
-              filters:
-                  - StripPrefix=1
-
             - id: auth-service-swagger
               uri: lb://auth-service
               predicates:
@@ -23,19 +16,17 @@ spring:
               filters:
                 - RewritePath=/auth/v3/api-docs, /v3/api-docs
 
-            - id: user-service-route
-              uri: lb://user-service
-              predicates:
-                  - Path=/user/**
-              filters:
-                   - StripPrefix=1
-
             - id: user-service-swagger
               uri: lb://user-service
               predicates:
                 - Path=/users/v3/api-docs
               filters:
                 - RewritePath=/users/v3/api-docs, /v3/api-docs
+
+            - id: auth-service-route
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth/**
 
 springdoc:
   version: '@springdoc.version@'

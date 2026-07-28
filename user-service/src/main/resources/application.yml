@@ -6,7 +6,7 @@ spring:
     name: user-service
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ecom-users}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ecom-userservice}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:root}
     driver-class-name: org.postgresql.Driver

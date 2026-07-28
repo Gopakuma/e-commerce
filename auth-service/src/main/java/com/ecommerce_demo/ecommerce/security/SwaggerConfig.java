@@ -2,6 +2,7 @@ package com.ecommerce_demo.ecommerce.security;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -15,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
             title = "Auth Service",
             description = "Microservice for handling login , registration and JWT token services"
-        )
+        ),
+        servers = {@Server(url = "http://localhost:8080", description = "API Gateway")}
 )
 public class SwaggerConfig {
     @Bean
@@ -28,7 +30,7 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
-                .group("auth-servide")
+                .group("auth-service")
                 .packagesToScan("com.ecommerce_demo.ecommerce.controller")
                 .build();
     }
