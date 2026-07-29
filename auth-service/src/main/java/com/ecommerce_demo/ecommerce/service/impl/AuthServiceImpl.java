@@ -144,15 +144,7 @@ public class AuthServiceImpl  implements AuthService {
     }
 
     @Override
-    public ValidateTokenResponse validateJwtToken(ValidateTokenRequest validateTokenRequest) {
-        String token = validateTokenRequest.getToken();
-        if(token == null){
-            return ValidateTokenResponse.builder()
-                    .isValid(false)
-                    .build();
-        }
-        return ValidateTokenResponse.builder()
-                .isValid(jwtService.validateToken(token))
-                .build();
+    public Boolean validateJwtToken() {
+        return true;
     }
 }

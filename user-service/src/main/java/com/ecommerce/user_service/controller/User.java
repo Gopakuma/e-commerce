@@ -23,7 +23,7 @@ public class User {
         return "PONG";
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDetailsResponse> fetchUserDetails(@PathVariable("id") Long userId){
         UserDetailsResponse response = userService.getUserDetails(userId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -35,11 +35,16 @@ public class User {
         return ResponseEntity.status(HttpStatus.CREATED).body(uuidStatus);
     }
 
-    @PostMapping("user/update/{id}")
+    @PostMapping("/update/{id}")
     public ResponseEntity<UserDetailsUpdateResponse> updateUser(
             @PathVariable("id") Long userId,
             @RequestBody UserDetailsUpdateRequest userDetailsUpdateRequest) {
         UserDetailsUpdateResponse response = userService.updateUserDetails(userId, userDetailsUpdateRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/securedApi")
+    public String securedApi() {
+        return "You are Authenticated";
     }
 }

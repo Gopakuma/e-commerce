@@ -28,6 +28,11 @@ spring:
               predicates:
                 - Path=/auth/**
 
+            - id: user-service-route
+              uri: lb://user-service
+              predicates:
+                - Path=/user/**
+
 springdoc:
   version: '@springdoc.version@'
   swagger-ui:
@@ -42,11 +47,6 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
-
-jwt:
-  secret: secretKey123secretKeysecret123KeysecretKey123
-  access_expiration: 900000
-  refresh_expiration: 172800000
 
 management:
   endpoints:

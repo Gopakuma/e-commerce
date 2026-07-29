@@ -46,9 +46,9 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/validateToken")
-    public Boolean validateToken(@RequestBody ValidateTokenRequest validateTokenRequest){
-        ValidateTokenResponse response = authService.validateJwtToken(validateTokenRequest);
-        return response.isValid();
+    @GetMapping("/validateUser")
+    public Boolean validateUser(){
+        Boolean response = authService.validateJwtToken();
+        return response;
     }
 }

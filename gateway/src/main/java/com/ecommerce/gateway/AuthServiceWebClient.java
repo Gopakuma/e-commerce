@@ -6,7 +6,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 
 @Configuration
-public class WebClientConfig {
+public class AuthServiceWebClient {
 
     @Bean
     public WebClient webClient() {
