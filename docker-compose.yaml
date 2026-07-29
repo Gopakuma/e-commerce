@@ -7,6 +7,11 @@ services:
       - "8761:8761"
     networks:
       - ecommerce-network
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8761/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   postgres-db:
     image: postgres:15-alpine
@@ -22,10 +27,10 @@ services:
     networks:
       - ecommerce-network
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d ecommerce" ]
-      interval: 5s
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   gateway-service:
     build: ./gateway
@@ -58,15 +63,17 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     healthcheck:
-      test: [ "CMD", "wget", "--spider", "-q", "http://eureka-server:8761/" ]
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8080/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 10
     depends_on:
       postgres-db:
-        condition: service_started
+        condition: service_healthy
       eureka-server:
-        condition: service_started
+        condition: service_healthy
+      gateway-service:
+        condition: service_healthy
     networks:
       - ecommerce-network
 
@@ -82,17 +89,51 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     healthcheck:
-      test: [ "CMD", "wget", "--spider", "-q", "http://eureka-server:8761/" ]
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8081/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 10
     depends_on:
       postgres-db:
-        condition: service_started
+        condition: service_healthy
       eureka-server:
-        condition: service_started
+        condition: service_healthy
+      gateway-service:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
     networks:
       - ecommerce-network
+
+  startup-message:
+    image: alpine
+    depends_on:
+      gateway-service:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+      user-service:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+    command: >
+      sh -c "
+      echo '========================================';
+      echo ' E-Commerce Microservices Started';
+      echo '========================================';
+      echo '';
+      echo 'API Gateway : http://localhost:8080';
+      echo 'Eureka      : http://localhost:8761';
+      echo '';
+      echo 'Services:';
+      echo '✓ AUTH-SERVICE';
+      echo '✓ USER-SERVICE';
+      echo '✓ API-GATEWAY';
+      echo '✓ EUREKA-SERVER';
+      echo '';
+      echo 'Ready for testing 🚀';
+      echo '========================================';
+      "
 
 networks:
   ecommerce-network:

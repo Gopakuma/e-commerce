@@ -1,0 +1,44 @@
+# E-Commerce Microservices
+
+## Requirements
+
+- Docker
+- Docker Compose
+
+
+## Run Application
+
+Clone repository:
+
+git clone <repo-url>
+
+Start services:
+
+docker compose up --build
+
+Wait till you see
+ "E-Commerce Microservices Started"
+log message on console..
+
+
+## Available URLs
+
+API Gateway:
+http://localhost:8080
+
+Eureka Dashboard:
+http://localhost:8761
+
+
+## Test APIs
+
+Swagger:
+Go to this url :
+http://localhost:8080/swagger-ui/index.html
+
+Select the service you want to test from top right drop down
+
+----------------------------------------------------------------------------------
+Myself Gopakumar - @gopakumarg893@gmail.com.
+This is my first Mirco Service based major Java Spring Boot Project..
+Please don't mind the mistakes, I am very open to your suggestions..!!  :)

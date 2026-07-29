@@ -52,10 +52,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
-  endpoint:
-    gateway:
-      access: unrestricted
+        include: health
 
 logging:
   level:

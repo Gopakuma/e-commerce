@@ -17,7 +17,6 @@ spring:
       ddl-auto: update
     show-sql: on
 
-
 eureka:
   client:
     service-url:
@@ -27,5 +26,9 @@ eureka:
   instance:
     prefer-ip-address: true
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
 
