@@ -104,6 +104,23 @@ public class GlobalExceptionHandler {
               .body(errorResponse);
    }
 
+   @ExceptionHandler(ResetPasswordFailedException.class)
+   public ResponseEntity<ErrorResponse> handleRefreshTokenFailedException(
+           ResetPasswordFailedException ex,
+           HttpServletRequest request) {
+
+      ErrorResponse errorResponse = ErrorResponse.builder()
+              .timestamp(LocalDateTime.now())
+              .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+              .status(HttpStatus.BAD_REQUEST.value())
+              .message(ex.getMessage())
+              .path(request.getRequestURI())
+              .build();
+
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+              .body(errorResponse);
+   }
+
    @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(
            Exception ex,

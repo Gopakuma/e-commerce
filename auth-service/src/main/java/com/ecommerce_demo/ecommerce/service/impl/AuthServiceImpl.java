@@ -2,26 +2,19 @@ package com.ecommerce_demo.ecommerce.service.impl;
 
 import com.ecommerce_demo.ecommerce.common.enums.Role;
 import com.ecommerce_demo.ecommerce.common.enums.TokenType;
-import com.ecommerce_demo.ecommerce.dto.request.LoginRequest;
-import com.ecommerce_demo.ecommerce.dto.request.RefreshTokenRequest;
-import com.ecommerce_demo.ecommerce.dto.request.RegisterRequest;
-import com.ecommerce_demo.ecommerce.dto.request.ValidateTokenRequest;
-import com.ecommerce_demo.ecommerce.dto.response.LoginResponse;
-import com.ecommerce_demo.ecommerce.dto.response.RefreshTokenResponse;
-import com.ecommerce_demo.ecommerce.dto.response.RegisterResponse;
-import com.ecommerce_demo.ecommerce.dto.response.ValidateTokenResponse;
+import com.ecommerce_demo.ecommerce.dto.request.*;
+import com.ecommerce_demo.ecommerce.dto.response.*;
 import com.ecommerce_demo.ecommerce.entity.User;
-import com.ecommerce_demo.ecommerce.exception.LoginFailedException;
-import com.ecommerce_demo.ecommerce.exception.RefreshTokenFailedException;
-import com.ecommerce_demo.ecommerce.exception.UserAlreadyExistsException;
-import com.ecommerce_demo.ecommerce.exception.UserRegistrationFailedException;
+import com.ecommerce_demo.ecommerce.exception.*;
 import com.ecommerce_demo.ecommerce.repository.UserRepository;
 import com.ecommerce_demo.ecommerce.security.JwtService;
 import com.ecommerce_demo.ecommerce.service.AuthService;
 import com.ecommerce_demo.ecommerce.util.UserServiceClient;
 import com.ecommerce_demo.ecommerce.util.Util;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
@@ -35,9 +28,8 @@ public class AuthServiceImpl  implements AuthService {
 
     private final JwtService jwtService;
 
-    private final WebClient webClient;
-
     private final UserServiceClient userServiceClient;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${jwt.access_expiration}")
     private Long access_expiration;
@@ -50,13 +42,13 @@ public class AuthServiceImpl  implements AuthService {
             Util util,
             JwtService jwtService,
             WebClient webClient,
-            UserServiceClient userServiceClient) {
+            UserServiceClient userServiceClient, PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
         this.util = util;
         this.jwtService = jwtService;
-        this.webClient = webClient;
         this.userServiceClient = userServiceClient;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -146,5 +138,40 @@ public class AuthServiceImpl  implements AuthService {
     @Override
     public Boolean validateJwtToken() {
         return true;
+    }
+
+    @Override
+    @Transactional
+    public ResetPasswordResponse resetPasswordService(ResetPasswordRequest request) throws ResetPasswordFailedException {
+        User existingUser = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(()-> new ResetPasswordFailedException("Invalid email or password"));
+
+        if(!passwordEncoder.matches(
+                request.getOldPassword(),
+                existingUser.getPassword())
+        ){
+            throw new ResetPasswordFailedException("Invalid email or password");
+        }
+
+        if(passwordEncoder.matches(
+                request.getNewPassword(),
+                existingUser.getPassword())
+        ){
+            throw new ResetPasswordFailedException("New password should different from Old password");
+        }
+
+        existingUser.setPassword(passwordEncoder.encode(request.getNewPassword()));
+
+        try {
+            userRepository.save(existingUser);
+            return ResetPasswordResponse.builder()
+                    .email(existingUser.getEmail())
+                    .username(existingUser.getUsername())
+                    .message("Reset Password Successfully !")
+                    .build();
+        } catch (Exception ex) {
+            throw new ResetPasswordFailedException("Password Reset Failed: " + ex.getMessage());
+        }
+
     }
 }
