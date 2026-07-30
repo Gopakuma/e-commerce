@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    UserDetailsResponse getUserDetails(Long userId) throws InvalidUserException;
+    UserDetailsResponse getUserDetails(String userId, String email, String username) throws InvalidUserException;
 
     UserDetailsUpdateResponse updateUserDetails(Long userId, UserDetailsUpdateRequest userDetailsUpdateRequest) throws UserUpdateFailedException;
 

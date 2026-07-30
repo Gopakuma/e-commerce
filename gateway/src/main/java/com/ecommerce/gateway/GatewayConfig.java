@@ -1,9 +1,11 @@
 package com.ecommerce.gateway;
 
+import com.ecommerce.gateway.dto.ValidateJwtResponse;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -40,20 +42,23 @@ public class GatewayConfig implements GlobalFilter {
             return exchange.getResponse().setComplete();
         }
 
-        authServiceClient.webClient()
+        return authServiceClient.webClient()
                 .get()
                 .uri("lb://auth-service/validateUser")
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .retrieve()
-                .toBodilessEntity()
-                .flatMap(response -> chain.filter(exchange))
+                .bodyToMono(ValidateJwtResponse.class)
+                .flatMap(response ->{
+                    ServerHttpRequest request = exchange.getRequest().mutate()
+                            .header("X-User-Id", response.getUuid())
+                            .header("X-User-Email", response.getEmail())
+                            .header("X-Username", response.getUsername())
+                            .build();
+                 return chain.filter(exchange.mutate().request(request).build());
+                })
                 .onErrorResume(ex -> {
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                     return exchange.getResponse().setComplete();
                 });
-
-
-
-        return chain.filter(exchange);
     }
 }

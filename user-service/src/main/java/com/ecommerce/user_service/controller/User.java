@@ -24,8 +24,12 @@ public class User {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDetailsResponse> fetchUserDetails(@PathVariable("id") Long userId){
-        UserDetailsResponse response = userService.getUserDetails(userId);
+    public ResponseEntity<UserDetailsResponse> fetchUserDetails(
+            @RequestHeader("X-User-Id") String userId,
+            @RequestHeader("X-User-Email") String email,
+            @RequestHeader("X-Username") String username
+    ){
+        UserDetailsResponse response = userService.getUserDetails(userId, email, username);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

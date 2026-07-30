@@ -2,6 +2,7 @@ package com.ecommerce_demo.ecommerce.controller;
 
 import com.ecommerce_demo.ecommerce.dto.request.*;
 import com.ecommerce_demo.ecommerce.dto.response.*;
+import com.ecommerce_demo.ecommerce.entity.User;
 import com.ecommerce_demo.ecommerce.service.impl.AuthServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -41,8 +42,8 @@ public class AuthController {
     }
 
     @GetMapping("/validateUser")
-    public Boolean validateUser(){
-        return authService.validateJwtToken();
+    public ValidateJwtResponse validateUser(@RequestAttribute AuthenticatedUser user){
+        return authService.validateJwtToken(user);
     }
 
 //    @PostMapping("/forgot-password")

@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
 
@@ -41,7 +40,6 @@ public class AuthServiceImpl  implements AuthService {
             UserRepository userRepository,
             Util util,
             JwtService jwtService,
-            WebClient webClient,
             UserServiceClient userServiceClient, PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
@@ -103,8 +101,16 @@ public class AuthServiceImpl  implements AuthService {
            throw new LoginFailedException("Invalid username or password");
         }
 
-        String accessToken = jwtService.generateToken(loginRequest.getUsername(), access_expiration, TokenType.ACCESS);
-        String refreshToken = jwtService.generateRefreshToken(loginRequest.getUsername(), refresh_expiration, TokenType.REFRESH);
+        String accessToken = jwtService.generateToken(
+                user,
+                access_expiration,
+                TokenType.ACCESS);
+
+        String refreshToken = jwtService.generateRefreshToken(
+                user,
+                refresh_expiration,
+                TokenType.REFRESH);
+
         return LoginResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
@@ -127,8 +133,15 @@ public class AuthServiceImpl  implements AuthService {
             throw new RefreshTokenFailedException("Refresh Token is Invalid or Expired");
         }
 
-        String accessToken = jwtService.generateToken(user.getUsername(), access_expiration, TokenType.ACCESS);
-        String refreshToken = jwtService.generateRefreshToken(user.getUsername(), refresh_expiration, TokenType.REFRESH);
+        String accessToken = jwtService.generateToken(
+                user,
+                access_expiration,
+                TokenType.ACCESS);
+
+        String refreshToken = jwtService.generateRefreshToken(
+                user,
+                refresh_expiration,
+                TokenType.REFRESH);
         return RefreshTokenResponse.builder()
                 .refreshToken(refreshToken)
                 .accessToken(accessToken)
@@ -136,8 +149,12 @@ public class AuthServiceImpl  implements AuthService {
     }
 
     @Override
-    public Boolean validateJwtToken() {
-        return true;
+    public ValidateJwtResponse validateJwtToken(AuthenticatedUser user) {
+        return ValidateJwtResponse.builder()
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .uuid(user.getUuid())
+                .build();
     }
 
     @Override

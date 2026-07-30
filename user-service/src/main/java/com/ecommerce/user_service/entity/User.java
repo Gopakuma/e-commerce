@@ -24,6 +24,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String uuid;
 
+    private int phone;
+
     private String city;
 
     private int pincode;

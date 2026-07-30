@@ -1,6 +1,7 @@
 package com.ecommerce_demo.ecommerce.security;
 
 import com.ecommerce_demo.ecommerce.common.enums.TokenType;
+import com.ecommerce_demo.ecommerce.dto.request.AuthenticatedUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -71,6 +72,12 @@ public class JwtFilter extends OncePerRequestFilter {
                                 userDetails.getAuthorities()
                         );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                request.setAttribute("User",
+                        AuthenticatedUser.builder()
+                                .uuid(jwtService.extractUuid(jwt))
+                                .username(username)
+                                .email(jwtService.extractEmail(jwt))
+                                .build());
             }
 
         }

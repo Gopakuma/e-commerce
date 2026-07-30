@@ -1,9 +1,6 @@
 package com.ecommerce_demo.ecommerce.service;
 
-import com.ecommerce_demo.ecommerce.dto.request.LoginRequest;
-import com.ecommerce_demo.ecommerce.dto.request.RefreshTokenRequest;
-import com.ecommerce_demo.ecommerce.dto.request.RegisterRequest;
-import com.ecommerce_demo.ecommerce.dto.request.ResetPasswordRequest;
+import com.ecommerce_demo.ecommerce.dto.request.*;
 import com.ecommerce_demo.ecommerce.dto.response.*;
 import com.ecommerce_demo.ecommerce.exception.LoginFailedException;
 import com.ecommerce_demo.ecommerce.exception.RefreshTokenFailedException;
@@ -17,7 +14,7 @@ public interface AuthService {
 
     RefreshTokenResponse refresh(RefreshTokenRequest refreshTokenRequest) throws RefreshTokenFailedException;
 
-    Boolean validateJwtToken();
+    ValidateJwtResponse validateJwtToken(AuthenticatedUser user);
 
     ResetPasswordResponse resetPasswordService(ResetPasswordRequest resetPasswordRequest) throws ResetPasswordFailedException;
 }

@@ -31,12 +31,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetailsResponse getUserDetails(Long userId) {
-        User user = userRepository.findById(userId)
+    public UserDetailsResponse getUserDetails(String userId, String email, String username) {
+        User user = userRepository.findByUuid(userId)
                 .orElseThrow(() -> new InvalidUserException("Invalid username or email"));
 
         return UserDetailsResponse.builder()
-
+                .email(email)
+                .username(username)
+                .city(user.getCity())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .pincode(user.getPincode())
                 .build();
     }
 

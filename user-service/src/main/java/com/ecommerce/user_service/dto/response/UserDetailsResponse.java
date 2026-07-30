@@ -11,5 +11,11 @@ public class UserDetailsResponse {
 
     private String username;
     private String email;
+    private int phone;
+    private String city;
+    private String address;
+    private int pincode;
+
+
 
 }
