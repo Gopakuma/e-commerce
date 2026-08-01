@@ -3,7 +3,7 @@ package com.ecommerce.user_service.controller;
 import com.ecommerce.user_service.dto.request.UserDetailsUpdateRequest;
 import com.ecommerce.user_service.dto.response.UserDetailsResponse;
 import com.ecommerce.user_service.dto.response.UserDetailsUpdateResponse;
-import com.ecommerce.user_service.service.impl.UserServiceImpl;
+import com.ecommerce.user_service.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class User {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    public User(UserServiceImpl userService){
+    public User(UserService userService){
         this.userService = userService;
     }
 

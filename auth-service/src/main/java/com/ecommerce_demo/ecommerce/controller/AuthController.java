@@ -2,7 +2,7 @@ package com.ecommerce_demo.ecommerce.controller;
 
 import com.ecommerce_demo.ecommerce.dto.request.*;
 import com.ecommerce_demo.ecommerce.dto.response.*;
-import com.ecommerce_demo.ecommerce.entity.User;
+import com.ecommerce_demo.ecommerce.service.AuthService;
 import com.ecommerce_demo.ecommerce.service.impl.AuthServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final AuthServiceImpl authService;
+    private final AuthService authService;
 
-    public AuthController(AuthServiceImpl authService){
+    public AuthController(AuthService authService){
         this.authService = authService;
     }
 
