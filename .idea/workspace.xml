@@ -5,30 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/product-service/dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/ProductserviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/ProductserviceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/dto/request/PagingResultRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/dto/request/PagingResultRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/dto/response/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/dto/response/ErrorResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/dto/response/FetchProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/dto/response/FetchProductResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/dto/response/PagingResultResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/dto/response/PagingResultResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/exception/FetchProductFailedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/exception/FetchProductFailedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/service/Impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/service/Impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/java/com/ecommerce/productservice/util/PaginationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/ecommerce/productservice/util/PaginationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productservice/src/test/java/com/ecommerce/productservice/ProductserviceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/test/java/com/ecommerce/productservice/ProductserviceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +109,7 @@
   "keyToString": {
     "Docker.docker-compose.yaml.auth-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yaml.eureka-server: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.gateway-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yaml.postgres-db: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yaml.product-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yaml: Compose Deployment.executor": "Run",
@@ -174,7 +152,7 @@
       <recent name="$PROJECT_DIR$/auth-service" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yaml.product-service: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yaml.gateway-service: Compose Deployment">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="e-commerce" />
       <method v="2">
@@ -223,14 +201,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yaml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="docker-compose.yaml.auth-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -250,6 +220,19 @@
           <option name="services">
             <list>
               <option value="eureka-server" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.gateway-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="gateway-service" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yaml" />
@@ -284,8 +267,8 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Docker.docker-compose.yaml.gateway-service: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yaml.product-service: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yaml.auth-service: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yaml.eureka-server: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yaml.postgres-db: Compose Deployment" />
@@ -295,11 +278,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yaml.gateway-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.product-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.auth-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.postgres-db: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.eureka-server: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>

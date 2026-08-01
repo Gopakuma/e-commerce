@@ -16,6 +16,13 @@ spring:
               filters:
                 - RewritePath=/auth/v3/api-docs, /v3/api-docs
 
+            - id: product-service-swagger
+              uri: lb://product-service
+              predicates:
+                - Path=/product/v3/api-docs
+              filters:
+                - RewritePath=/product/v3/api-docs, /v3/api-docs
+
             - id: user-service-swagger
               uri: lb://user-service
               predicates:
@@ -32,6 +39,11 @@ spring:
               uri: lb://user-service
               predicates:
                 - Path=/user/**
+
+            - id: product-service-route
+              uri: lb://product-service
+              predicates:
+                - Path=/product/**
 
 springdoc:
   version: '@springdoc.version@'
