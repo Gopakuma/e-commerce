@@ -105,6 +105,36 @@ services:
     networks:
       - ecommerce-network
 
+  product-service:
+    build: ./product-service
+    image: product-service:latest
+    container_name: product-service
+    ports:
+      - "8083:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecom-productservice
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8081/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      gateway-service:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+      user-service:
+        condition: service_healthy
+    networks:
+      - ecommerce-network
+
   startup-message:
     image: alpine
     depends_on:

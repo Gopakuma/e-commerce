@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="10c1beb4-426e-4b6f-883f-b6da2924df18" name="Changes" comment="Exception Handling">
+      <change afterPath="$PROJECT_DIR$/../product-service/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/ProductserviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/ProductserviceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/dto/request/PagingResultRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/dto/request/PagingResultRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/dto/response/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/dto/response/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/dto/response/FetchProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/dto/response/FetchProductResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/dto/response/PagingResultResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/dto/response/PagingResultResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/exception/FetchProductFailedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/exception/FetchProductFailedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/service/Impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/service/Impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ecommerce/productservice/util/PaginationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/java/com/ecommerce/productservice/util/PaginationUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ecommerce/productservice/ProductserviceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/src/test/java/com/ecommerce/productservice/ProductserviceApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3HCLfgDtsOm3Is81CyDJpPZBgVC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ProductserviceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/gopu/GOPU/e-commerce/user-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="product-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="product-service" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ProductserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="product-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ecommerce.productservice.ProductserviceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.337" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.8665.337" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10c1beb4-426e-4b6f-883f-b6da2924df18" name="Changes" comment="" />
+      <created>1785367209125</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1785367209125</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fetch All products with pagination" />
+    <MESSAGE value="Exception Handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exception Handling" />
+  </component>
+</project>
