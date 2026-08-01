@@ -50,7 +50,7 @@ public class SwaggerAggregationConfig {
         urls.add(authService);
 
 
-        // User Service API docs (add when user-service is ready)
+        // User Service API docs
         AbstractSwaggerUiConfigProperties.SwaggerUrl userService =
                 new AbstractSwaggerUiConfigProperties.SwaggerUrl();
 
@@ -58,6 +58,15 @@ public class SwaggerAggregationConfig {
         userService.setUrl("/users/v3/api-docs");
 
         urls.add(userService);
+
+        // Product Service API docs
+        AbstractSwaggerUiConfigProperties.SwaggerUrl productService =
+                new AbstractSwaggerUiConfigProperties.SwaggerUrl();
+
+        productService.setName("product-service");
+        productService.setUrl("/product/v3/api-docs");
+
+        urls.add(productService);
 
 
         config.setUrls(urls);

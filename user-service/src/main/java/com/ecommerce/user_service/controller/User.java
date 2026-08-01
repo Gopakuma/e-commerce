@@ -4,6 +4,7 @@ import com.ecommerce.user_service.dto.request.UserDetailsUpdateRequest;
 import com.ecommerce.user_service.dto.response.UserDetailsResponse;
 import com.ecommerce.user_service.dto.response.UserDetailsUpdateResponse;
 import com.ecommerce.user_service.service.UserService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,11 @@ public class User {
 
     @GetMapping("/me")
     public ResponseEntity<UserDetailsResponse> fetchUserDetails(
+            @Parameter(hidden = true)
             @RequestHeader("X-User-Id") String userId,
+            @Parameter(hidden = true)
             @RequestHeader("X-User-Email") String email,
+            @Parameter(hidden = true)
             @RequestHeader("X-Username") String username
     ){
         UserDetailsResponse response = userService.getUserDetails(userId, email, username);

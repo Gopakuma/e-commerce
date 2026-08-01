@@ -117,7 +117,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     healthcheck:
-      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8081/actuator/health" ]
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8082/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -146,6 +146,8 @@ services:
         condition: service_healthy
       eureka-server:
         condition: service_healthy
+      product-service:
+        condition: service_healthy
     command: >
       sh -c "
       echo '========================================';
@@ -158,6 +160,7 @@ services:
       echo 'Services:';
       echo '✓ AUTH-SERVICE';
       echo '✓ USER-SERVICE';
+      echo '✓ PRODUCT-SERVICE';
       echo '✓ API-GATEWAY';
       echo '✓ EUREKA-SERVER';
       echo '';
