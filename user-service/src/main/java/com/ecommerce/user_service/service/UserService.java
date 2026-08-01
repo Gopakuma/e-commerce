@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     UserDetailsResponse getUserDetails(String userId, String email, String username) throws InvalidUserException;
 
-    UserDetailsUpdateResponse updateUserDetails(Long userId, UserDetailsUpdateRequest userDetailsUpdateRequest) throws UserUpdateFailedException;
+    UserDetailsUpdateResponse updateUserDetails(String userId, UserDetailsUpdateRequest userDetailsUpdateRequest) throws UserUpdateFailedException;
 
     Boolean createNewUUID(String uuid);
 }

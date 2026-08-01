@@ -11,4 +11,5 @@ public class UserDetailsUpdateRequest {
     private String city;
     private String address;
     private int pincode;
+    private int phone;
 }

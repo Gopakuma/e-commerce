@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class User {
 
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
 
     public User(UserServiceImpl userService){
         this.userService = userService;
@@ -23,7 +23,7 @@ public class User {
         return "PONG";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/me")
     public ResponseEntity<UserDetailsResponse> fetchUserDetails(
             @RequestHeader("X-User-Id") String userId,
             @RequestHeader("X-User-Email") String email,
@@ -39,9 +39,9 @@ public class User {
         return ResponseEntity.status(HttpStatus.CREATED).body(uuidStatus);
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update")
     public ResponseEntity<UserDetailsUpdateResponse> updateUser(
-            @PathVariable("id") Long userId,
+            @RequestHeader("X-User-Id") String userId,
             @RequestBody UserDetailsUpdateRequest userDetailsUpdateRequest) {
         UserDetailsUpdateResponse response = userService.updateUserDetails(userId, userDetailsUpdateRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
