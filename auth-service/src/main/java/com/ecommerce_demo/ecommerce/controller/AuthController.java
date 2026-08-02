@@ -3,8 +3,8 @@ package com.ecommerce_demo.ecommerce.controller;
 import com.ecommerce_demo.ecommerce.dto.request.*;
 import com.ecommerce_demo.ecommerce.dto.response.*;
 import com.ecommerce_demo.ecommerce.service.AuthService;
-import com.ecommerce_demo.ecommerce.service.impl.AuthServiceImpl;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,15 +42,11 @@ public class AuthController {
     }
 
     @GetMapping("/validateUser")
-    public ValidateJwtResponse validateUser(@RequestAttribute AuthenticatedUser user){
-        return authService.validateJwtToken(user);
+    public ValidateJwtResponse validateUser(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String header)
+    {
+        return authService.validateJwtToken(header);
     }
-
-//    @PostMapping("/forgot-password")
-//    public ResponseEntity<ForgotPassResponse> forgotPassword(@RequestBody ForgotPassRequest forgotPassRequest) {
-//        ForgotPassResponse response = authService.forgotPasswordService();
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
-//    }
 
     @PostMapping("/reset-password")
     public ResponseEntity<ResetPasswordResponse> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {

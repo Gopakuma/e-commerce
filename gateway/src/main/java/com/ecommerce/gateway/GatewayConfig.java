@@ -7,16 +7,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
 public class GatewayConfig implements GlobalFilter {
 
-    private final AuthServiceWebClient authServiceClient;
+    private final WebClient authServiceClient;
 
-    public GatewayConfig(AuthServiceWebClient authServiceClient) {
-        this.authServiceClient = authServiceClient;
+    public GatewayConfig(WebClient.Builder builder) {
+        this.authServiceClient = builder.build();
     }
 
 
@@ -42,9 +43,9 @@ public class GatewayConfig implements GlobalFilter {
             return exchange.getResponse().setComplete();
         }
 
-        return authServiceClient.webClient()
+        return authServiceClient
                 .get()
-                .uri("lb://auth-service/validateUser")
+                .uri("lb://auth-service/auth/validateUser")
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .retrieve()
                 .bodyToMono(ValidateJwtResponse.class)
@@ -58,6 +59,7 @@ public class GatewayConfig implements GlobalFilter {
                 })
                 .onErrorResume(ex -> {
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    ex.printStackTrace();
                     return exchange.getResponse().setComplete();
                 });
     }

@@ -7,11 +7,13 @@ import com.ecommerce.user_service.exception.InvalidUserException;
 import com.ecommerce.user_service.exception.UserUpdateFailedException;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public interface UserService {
     UserDetailsResponse getUserDetails(String userId, String email, String username) throws InvalidUserException;
 
     UserDetailsUpdateResponse updateUserDetails(String userId, UserDetailsUpdateRequest userDetailsUpdateRequest) throws UserUpdateFailedException;
 
-    Boolean createNewUUID(String uuid);
+    Boolean createNewUUID(UUID uuid);
 }

@@ -14,7 +14,7 @@ public interface AuthService {
 
     RefreshTokenResponse refresh(RefreshTokenRequest refreshTokenRequest) throws RefreshTokenFailedException;
 
-    ValidateJwtResponse validateJwtToken(AuthenticatedUser user);
+    ValidateJwtResponse validateJwtToken(String token);
 
     ResetPasswordResponse resetPasswordService(ResetPasswordRequest resetPasswordRequest) throws ResetPasswordFailedException;
 }

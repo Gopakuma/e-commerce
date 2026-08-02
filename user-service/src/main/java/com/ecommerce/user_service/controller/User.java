@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/user")
 public class User {
@@ -38,7 +40,7 @@ public class User {
     }
 
     @PostMapping("/uuid")
-    public ResponseEntity<Boolean> createUUID(@RequestBody String uuid) {
+    public ResponseEntity<Boolean> createUUID(@RequestBody UUID uuid) {
         Boolean uuidStatus = userService.createNewUUID(uuid);
         return ResponseEntity.status(HttpStatus.CREATED).body(uuidStatus);
     }

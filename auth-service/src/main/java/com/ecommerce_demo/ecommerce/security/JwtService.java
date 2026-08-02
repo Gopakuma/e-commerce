@@ -85,11 +85,12 @@ public class JwtService {
     }
 
     public TokenType extractTokenType(String token) {
-        return Jwts.parser()
-                .verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("type", TokenType.class);
+        String type =  Jwts.parser()
+                        .verifyWith(getSigningKey())
+                        .build()
+                        .parseSignedClaims(token)
+                        .getPayload()
+                        .get("type", String.class);
+        return TokenType.valueOf(type);
     }
 }

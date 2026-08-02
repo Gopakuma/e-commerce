@@ -149,11 +149,12 @@ public class AuthServiceImpl  implements AuthService {
     }
 
     @Override
-    public ValidateJwtResponse validateJwtToken(AuthenticatedUser user) {
+    public ValidateJwtResponse validateJwtToken(String header) {
+        String token = header.substring(7);
         return ValidateJwtResponse.builder()
-                .email(user.getEmail())
-                .username(user.getUsername())
-                .uuid(user.getUuid())
+                .email(jwtService.extractEmail(token))
+                .username(jwtService.extractUsername(token))
+                .uuid(jwtService.extractUuid(token))
                 .build();
     }
 

@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailsResponse getUserDetails(String userId, String email, String username) {
+        System.out.println("UUID received: '" + userId + "'");
         User user = userRepository.findByUuid(userId)
                 .orElseThrow(() -> new InvalidUserException("Invalid username or email"));
 
@@ -46,9 +49,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean createNewUUID(String uuid) {
+    public Boolean createNewUUID(UUID uuid) {
         User user = User.builder()
-                .uuid(uuid)
+                .uuid(uuid.toString())
                 .build();
         try {
             userRepository.save(user);
