@@ -11,11 +11,14 @@ import com.ecommerce_demo.ecommerce.security.JwtService;
 import com.ecommerce_demo.ecommerce.service.AuthService;
 import com.ecommerce_demo.ecommerce.util.UserServiceClient;
 import com.ecommerce_demo.ecommerce.util.Util;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -50,7 +53,7 @@ public class AuthServiceImpl  implements AuthService {
     }
 
     @Override
-    public RegisterResponse register(RegisterRequest registerRequest) {
+    public RegisterResponse register(RegisterRequest registerRequest,Role role) {
         if(userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new UserAlreadyExistsException("Email already exist");
         }
@@ -73,7 +76,7 @@ public class AuthServiceImpl  implements AuthService {
                 .password(util.encodePassword(registerRequest.getPassword()))
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
-                .role(Role.CUSTOMER)
+                .role(role)
                 .build();
 
         try{
@@ -93,7 +96,7 @@ public class AuthServiceImpl  implements AuthService {
     }
 
     @Override
-    public LoginResponse login(LoginRequest loginRequest) throws LoginFailedException {
+    public LoginResponse login(LoginRequest loginRequest, Role role) throws LoginFailedException {
         User user = userRepository.findByUsername(loginRequest.getUsername())
                 .orElseThrow(()-> new LoginFailedException("Invalid username or password"));
 
@@ -104,12 +107,16 @@ public class AuthServiceImpl  implements AuthService {
         String accessToken = jwtService.generateToken(
                 user,
                 access_expiration,
-                TokenType.ACCESS);
+                TokenType.ACCESS,
+                role
+                );
 
-        String refreshToken = jwtService.generateRefreshToken(
+        String refreshToken = jwtService.generateToken(
                 user,
                 refresh_expiration,
-                TokenType.REFRESH);
+                TokenType.REFRESH,
+                role
+                );
 
         return LoginResponse.builder()
                 .accessToken(accessToken)
@@ -119,13 +126,14 @@ public class AuthServiceImpl  implements AuthService {
     }
 
     @Override
-    public RefreshTokenResponse refresh(RefreshTokenRequest refreshTokenRequest) throws RefreshTokenFailedException {
+    public RefreshTokenResponse refresh(RefreshTokenRequest refreshTokenRequest, Role role) throws RefreshTokenFailedException {
         TokenType tokenType = jwtService.extractTokenType(refreshTokenRequest.getRefreshToken());
         if(tokenType != TokenType.REFRESH){
             throw new RefreshTokenFailedException("Invalid Token");
         }
+        Claims claims = jwtService.extractClaims(refreshTokenRequest.getRefreshToken());
 
-        String username = jwtService.extractUsername(refreshTokenRequest.getRefreshToken());
+        String username = claims.getSubject();
         User user = userRepository.findByUsername(username)
                 .orElseThrow(()-> new LoginFailedException("Invalid username or password"));
 
@@ -136,12 +144,16 @@ public class AuthServiceImpl  implements AuthService {
         String accessToken = jwtService.generateToken(
                 user,
                 access_expiration,
-                TokenType.ACCESS);
+                TokenType.ACCESS,
+                role
+                );
 
-        String refreshToken = jwtService.generateRefreshToken(
+        String refreshToken = jwtService.generateToken(
                 user,
                 refresh_expiration,
-                TokenType.REFRESH);
+                TokenType.REFRESH,
+                role
+                );
         return RefreshTokenResponse.builder()
                 .refreshToken(refreshToken)
                 .accessToken(accessToken)
@@ -151,10 +163,12 @@ public class AuthServiceImpl  implements AuthService {
     @Override
     public ValidateJwtResponse validateJwtToken(String header) {
         String token = header.substring(7);
+        Claims claims = jwtService.extractClaims(token);
+
         return ValidateJwtResponse.builder()
-                .email(jwtService.extractEmail(token))
-                .username(jwtService.extractUsername(token))
-                .uuid(jwtService.extractUuid(token))
+                .email(claims.get("email", String.class))
+                .username(claims.getSubject())
+                .uuid(claims.get("uuid", String.class))
                 .build();
     }
 
@@ -191,5 +205,26 @@ public class AuthServiceImpl  implements AuthService {
             throw new ResetPasswordFailedException("Password Reset Failed: " + ex.getMessage());
         }
 
+    }
+
+    @Override
+    public List<User> fetchAllUsers(Boolean enabled) {
+        if(enabled == null) {
+            return userRepository.findAll();
+        }
+        return userRepository.findByEnabled(enabled);
+    }
+
+    @Override
+    public User updateUserStatus(@RequestParam("Id") Long id, @RequestParam("enabled") Boolean enabled ) {
+
+        int updateRows = userRepository.updateUserStatus(id, enabled);
+
+        if(updateRows == 0) {
+            throw new RuntimeException("User Not Found");
+        }
+
+        return userRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("User Not Found"));
     }
 }

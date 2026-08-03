@@ -1,7 +1,9 @@
 package com.ecommerce_demo.ecommerce.security;
 
+import com.ecommerce_demo.ecommerce.common.enums.Role;
 import com.ecommerce_demo.ecommerce.common.enums.TokenType;
 import com.ecommerce_demo.ecommerce.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -22,39 +24,16 @@ public class JwtService {
     }
 
 
-    public String generateToken(User user, Long expiration, TokenType tokenType){
-        return buildToken(user, expiration, tokenType);
+    public String generateToken(User user, Long expiration, TokenType tokenType, Role role){
+        return buildToken(user, expiration, tokenType, role);
     }
 
-    public String generateRefreshToken(User user, Long expiration, TokenType tokenType){
-        return buildToken(user, expiration, tokenType);
-    }
-
-    public String extractUsername(String token){
+    public Claims extractClaims(String token){
         return Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
-                .getPayload()
-                .getSubject();
-    }
-
-    public String extractUuid(String token){
-        return Jwts.parser()
-                .verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("uuid", String.class);
-    }
-
-    public String extractEmail(String token){
-        return Jwts.parser()
-                .verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("email", String.class);
+                .getPayload();
     }
 
     public boolean validateToken(String token){
@@ -70,7 +49,7 @@ public class JwtService {
         }
     }
 
-    public String buildToken(User user, Long expiration, TokenType tokenType){
+    public String buildToken(User user, Long expiration, TokenType tokenType, Role role){
         return Jwts.builder()
                 .subject(user.getUsername())
                 .issuedAt(new Date())
@@ -81,6 +60,7 @@ public class JwtService {
                 .claim("uuid", user.getUuid())
                 .claim("email", user.getEmail())
                 .claim("type", tokenType.name())
+                .claim("role", role)
                 .compact();
     }
 

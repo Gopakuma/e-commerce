@@ -1,5 +1,6 @@
 package com.ecommerce_demo.ecommerce.controller;
 
+import com.ecommerce_demo.ecommerce.common.enums.Role;
 import com.ecommerce_demo.ecommerce.dto.request.*;
 import com.ecommerce_demo.ecommerce.dto.response.*;
 import com.ecommerce_demo.ecommerce.service.AuthService;
@@ -25,19 +26,19 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> userRegistration(@Valid @RequestBody RegisterRequest registerRequest) {
-            RegisterResponse response = authService.register(registerRequest);
+            RegisterResponse response = authService.register(registerRequest, Role.CUSTOMER);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        LoginResponse response = authService.login(loginRequest );
+        LoginResponse response = authService.login(loginRequest, Role.CUSTOMER);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<RefreshTokenResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-        RefreshTokenResponse response = authService.refresh(refreshTokenRequest);
+        RefreshTokenResponse response = authService.refresh(refreshTokenRequest, Role.CUSTOMER);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -53,4 +54,5 @@ public class AuthController {
         ResetPasswordResponse response = authService.resetPasswordService(resetPasswordRequest);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
+
 }

@@ -3,6 +3,7 @@ package com.ecommerce_demo.ecommerce.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -118,6 +119,23 @@ public class GlobalExceptionHandler {
               .build();
 
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+              .body(errorResponse);
+   }
+
+   @ExceptionHandler(AccessDeniedException.class)
+   public ResponseEntity<ErrorResponse> handleAccessDeniedException(
+           ResetPasswordFailedException ex,
+           HttpServletRequest request) {
+
+      ErrorResponse errorResponse = ErrorResponse.builder()
+              .timestamp(LocalDateTime.now())
+              .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+              .status(HttpStatus.UNAUTHORIZED.value())
+              .message(ex.getMessage())
+              .path(request.getRequestURI())
+              .build();
+
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
               .body(errorResponse);
    }
 

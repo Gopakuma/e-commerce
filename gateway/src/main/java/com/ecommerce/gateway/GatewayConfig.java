@@ -28,6 +28,9 @@ public class GatewayConfig implements GlobalFilter {
 
         if (path.equals("/auth/login")
                 || path.equals("/auth/register")
+                || path.equals("/auth/admin/register")
+                || path.equals("/auth/admin/login")
+                || path.equals("/auth/admin/refresh")
                 || path.endsWith("/v3/api-docs")
                 || path.equals("/auth/ping")
                 || path.equals("/user/ping")) {

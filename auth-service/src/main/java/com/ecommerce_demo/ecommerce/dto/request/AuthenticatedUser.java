@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
+
 @Getter
 @Setter
 @Builder
@@ -11,4 +13,5 @@ public class AuthenticatedUser {
     private String uuid;
     private String email;
     private String username;
+    private Collection<String> role;
 }

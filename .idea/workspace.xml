@@ -4,18 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="Changes">
+    <list default="true" id="5608f6ba-6581-40d2-8955-948626ad54c6" name="Changes" comment="Bug fixes">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/dto/request/AuthenticatedUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/dto/request/AuthenticatedUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/JwtFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/AuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/impl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/ecommerce_demo/ecommerce/service/impl/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/AuthServiceWebClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/AuthServiceWebClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ecommerce/gateway/GatewayConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/controller/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/controller/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/ecommerce/user_service/service/impl/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -473,6 +476,7 @@
     <MESSAGE value="Auth Service and Gateway Changes" />
     <MESSAGE value="Actuator Changes" />
     <MESSAGE value="Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes" />
+    <MESSAGE value="Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes" />
   </component>
 </project>

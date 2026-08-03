@@ -2,6 +2,7 @@ package com.ecommerce_demo.ecommerce.security;
 
 import com.ecommerce_demo.ecommerce.common.enums.TokenType;
 import com.ecommerce_demo.ecommerce.dto.request.AuthenticatedUser;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,12 +11,13 @@ import org.jspecify.annotations.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
-@Service
+@Component
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
@@ -53,33 +55,40 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String jwt = authHeader.substring(7);
-        String username = jwtService.extractUsername(jwt);
 
-        if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails =
-                    customUserDetailsService.loadUserByUsername(username);
+        if(jwtService.extractTokenType(jwt) != TokenType.ACCESS){
+            filterChain.doFilter(request, response);
+            return;
+        }
 
-            if(jwtService.extractTokenType(jwt) != TokenType.ACCESS){
-                filterChain.doFilter(request, response);
-                return;
-            }
+        if(jwtService.validateToken(jwt)) {
+            Claims claims = jwtService.extractClaims(jwt);
+            String username = claims.getSubject();
 
-            if(jwtService.validateToken(jwt)){
+            if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+
+                UserDetails userDetails =
+                        customUserDetailsService.loadUserByUsername(username);
+
+                AuthenticatedUser authenticatedUser = AuthenticatedUser.builder()
+                        .uuid(claims.get("uuid", String.class))
+                        .username(username)
+                        .email(claims.get("email", String.class))
+                        .role(userDetails.getAuthorities().stream()
+                                .map(grantedAuthority -> grantedAuthority.getAuthority())
+                                .collect(Collectors.toList())
+                        )
+                        .build();
+
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(
-                                userDetails,
+                                authenticatedUser,
                                 null,
                                 userDetails.getAuthorities()
                         );
+                authenticationToken.setDetails(authenticatedUser);
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                request.setAttribute("User",
-                        AuthenticatedUser.builder()
-                                .uuid(jwtService.extractUuid(jwt))
-                                .username(username)
-                                .email(jwtService.extractEmail(jwt))
-                                .build());
             }
-
         }
         filterChain.doFilter(request, response);
     }
