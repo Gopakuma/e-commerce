@@ -57,6 +57,7 @@ public class GatewayConfig implements GlobalFilter {
                             .header("X-User-Id", response.getUuid())
                             .header("X-User-Email", response.getEmail())
                             .header("X-Username", response.getUsername())
+                            .header("X-User-Role", response.getRole().name())
                             .build();
                  return chain.filter(exchange.mutate().request(request).build());
                 })

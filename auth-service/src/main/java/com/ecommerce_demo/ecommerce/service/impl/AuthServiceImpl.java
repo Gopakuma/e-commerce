@@ -100,6 +100,10 @@ public class AuthServiceImpl  implements AuthService {
         User user = userRepository.findByUsername(loginRequest.getUsername())
                 .orElseThrow(()-> new LoginFailedException("Invalid username or password"));
 
+        if(!user.isEnabled()) {
+            throw new UserDeactivatedException("Your account has been deactivated. Please contact support.");
+        }
+
         if(!util.getPasswordEncoder().matches(loginRequest.getPassword(), user.getPassword())) {
            throw new LoginFailedException("Invalid username or password");
         }
@@ -137,6 +141,10 @@ public class AuthServiceImpl  implements AuthService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(()-> new LoginFailedException("Invalid username or password"));
 
+        if(!user.isEnabled()) {
+            throw new UserDeactivatedException("Your account has been deactivated. Please contact support.");
+        }
+
         if (!jwtService.validateToken(refreshTokenRequest.getRefreshToken())) {
             throw new RefreshTokenFailedException("Refresh Token is Invalid or Expired");
         }
@@ -169,6 +177,7 @@ public class AuthServiceImpl  implements AuthService {
                 .email(claims.get("email", String.class))
                 .username(claims.getSubject())
                 .uuid(claims.get("uuid", String.class))
+                .role(claims.get("role", Role.class))
                 .build();
     }
 

@@ -7,6 +7,7 @@ import com.ecommerce.user_service.service.UserService;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -57,4 +58,8 @@ public class User {
     public String securedApi() {
         return "You are Authenticated";
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/adminOnly")
+    public String adminOnly() {return "Hello Admin !!";}
 }

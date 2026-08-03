@@ -124,18 +124,35 @@ public class GlobalExceptionHandler {
 
    @ExceptionHandler(AccessDeniedException.class)
    public ResponseEntity<ErrorResponse> handleAccessDeniedException(
-           ResetPasswordFailedException ex,
+           AccessDeniedException ex,
            HttpServletRequest request) {
 
       ErrorResponse errorResponse = ErrorResponse.builder()
               .timestamp(LocalDateTime.now())
-              .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
-              .status(HttpStatus.UNAUTHORIZED.value())
+              .error(HttpStatus.UNPROCESSABLE_CONTENT.getReasonPhrase())
+              .status(HttpStatus.UNPROCESSABLE_CONTENT.value())
               .message(ex.getMessage())
               .path(request.getRequestURI())
               .build();
 
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT)
+              .body(errorResponse);
+   }
+
+   @ExceptionHandler(UserDeactivatedException.class)
+   public ResponseEntity<ErrorResponse> handleUserDeactivatedException(
+           UserDeactivatedException ex,
+           HttpServletRequest request) {
+
+      ErrorResponse errorResponse = ErrorResponse.builder()
+              .timestamp(LocalDateTime.now())
+              .error(HttpStatus.FORBIDDEN.getReasonPhrase())
+              .status(HttpStatus.FORBIDDEN.value())
+              .message(ex.getMessage())
+              .path(request.getRequestURI())
+              .build();
+
+      return ResponseEntity.status(HttpStatus.FORBIDDEN)
               .body(errorResponse);
    }
 
