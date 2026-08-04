@@ -53,7 +53,6 @@ public class User {
         UserDetailsUpdateResponse response = userService.updateUserDetails(userId, userDetailsUpdateRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
     @GetMapping("/securedApi")
     public String securedApi() {
         return "You are Authenticated";

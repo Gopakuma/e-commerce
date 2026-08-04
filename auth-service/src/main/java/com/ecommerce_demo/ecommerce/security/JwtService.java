@@ -60,7 +60,7 @@ public class JwtService {
                 .claim("uuid", user.getUuid())
                 .claim("email", user.getEmail())
                 .claim("type", tokenType.name())
-                .claim("role", role)
+                .claim("role", role.name())
                 .compact();
     }
 

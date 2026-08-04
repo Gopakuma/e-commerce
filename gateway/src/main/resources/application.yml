@@ -26,9 +26,9 @@ spring:
             - id: user-service-swagger
               uri: lb://user-service
               predicates:
-                - Path=/users/v3/api-docs
+                - Path=/user/v3/api-docs
               filters:
-                - RewritePath=/users/v3/api-docs, /v3/api-docs
+                - RewritePath=/user/v3/api-docs, /v3/api-docs
 
             - id: auth-service-route
               uri: lb://auth-service

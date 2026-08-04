@@ -29,11 +29,12 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
-                                        "/v3/api-docs/**",       // Corrected (starts with /)
-                                        "/users/v3/api-docs/**", // Matches gateway paths
+                                        "/v3/api-docs/**",
+                                        "/user/v3/api-docs/**",
                                         "/actuator/health",
                                         "/swagger-ui/**",
-                                        "/swagger-ui.html"
+                                        "/swagger-ui.html",
+                                        "/user/uuid"
 
                                 ).permitAll()
                         .anyRequest().authenticated())

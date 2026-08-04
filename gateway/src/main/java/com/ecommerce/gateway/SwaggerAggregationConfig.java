@@ -55,7 +55,7 @@ public class SwaggerAggregationConfig {
                 new AbstractSwaggerUiConfigProperties.SwaggerUrl();
 
         userService.setName("user-service");
-        userService.setUrl("/users/v3/api-docs");
+        userService.setUrl("/user/v3/api-docs");
 
         urls.add(userService);
 

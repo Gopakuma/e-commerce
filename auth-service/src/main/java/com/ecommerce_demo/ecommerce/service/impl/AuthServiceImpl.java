@@ -177,7 +177,7 @@ public class AuthServiceImpl  implements AuthService {
                 .email(claims.get("email", String.class))
                 .username(claims.getSubject())
                 .uuid(claims.get("uuid", String.class))
-                .role(claims.get("role", Role.class))
+                .role(Role.valueOf(claims.get("role", String.class)))
                 .build();
     }
 

@@ -100,8 +100,6 @@ services:
         condition: service_healthy
       gateway-service:
         condition: service_healthy
-      auth-service:
-        condition: service_healthy
     networks:
       - ecommerce-network
 
@@ -127,10 +125,6 @@ services:
       eureka-server:
         condition: service_healthy
       gateway-service:
-        condition: service_healthy
-      auth-service:
-        condition: service_healthy
-      user-service:
         condition: service_healthy
     networks:
       - ecommerce-network
