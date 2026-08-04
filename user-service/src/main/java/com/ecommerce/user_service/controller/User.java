@@ -48,9 +48,16 @@ public class User {
 
     @PostMapping("/update")
     public ResponseEntity<UserDetailsUpdateResponse> updateUser(
+            @Parameter(hidden = true)
             @RequestHeader("X-User-Id") String userId,
+            @Parameter(hidden = true)
+            @RequestHeader("X-User-Email") String email,
             @RequestBody UserDetailsUpdateRequest userDetailsUpdateRequest) {
-        UserDetailsUpdateResponse response = userService.updateUserDetails(userId, userDetailsUpdateRequest);
+
+        userDetailsUpdateRequest.setEmail(email);
+        userDetailsUpdateRequest.setUserId(userId);
+
+        UserDetailsUpdateResponse response = userService.updateUserDetails(userDetailsUpdateRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @GetMapping("/securedApi")

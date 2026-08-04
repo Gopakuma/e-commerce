@@ -24,8 +24,6 @@ public class GatewayFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
-        System.out.println("===== USER SERVICE FILTER HIT =====");
-
         String path = request.getRequestURI();
 
         if (path.contains("/v3/api-docs") ||
@@ -45,7 +43,6 @@ public class GatewayFilter extends OncePerRequestFilter {
         String role = request.getHeader("X-User-Role");
 
         if(role != null && username != null) {
-            System.out.println("===== USER SERVICE FILTER CONDITION HIT =====");
             List<SimpleGrantedAuthority> grantedAuthorities = List.of(
                     new SimpleGrantedAuthority("ROLE_" + role));
 

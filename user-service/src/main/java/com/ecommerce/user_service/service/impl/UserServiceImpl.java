@@ -64,11 +64,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDetailsUpdateResponse updateUserDetails(
-            String userId,
-            UserDetailsUpdateRequest userDetails) {
-
-        User currentUser = userRepository.findByUuid(userId)
+    public UserDetailsUpdateResponse updateUserDetails(UserDetailsUpdateRequest userDetails) {
+        User currentUser = userRepository.findByUuid(userDetails.getUserId())
                 .orElseThrow(() -> new UserUpdateFailedException("Invalid User"));
 
         currentUser.setCity(userDetails.getCity());
@@ -78,7 +75,15 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(currentUser);
 
+        User updatedUser = userRepository.findByUuid(userDetails.getUserId())
+                .orElseThrow(() -> new UserUpdateFailedException("User update failed"));
+
         return UserDetailsUpdateResponse.builder()
+                .email(userDetails.getEmail())
+                .address(updatedUser.getAddress())
+                .city(updatedUser.getCity())
+                .phone(updatedUser.getPhone())
+                .pincode(updatedUser.getPincode())
                 .message("User details updated successfully !!")
                 .build();
     }

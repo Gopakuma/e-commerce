@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface UserService {
     UserDetailsResponse getUserDetails(String userId, String email, String username) throws InvalidUserException;
 
-    UserDetailsUpdateResponse updateUserDetails(String userId, UserDetailsUpdateRequest userDetailsUpdateRequest) throws UserUpdateFailedException;
+    UserDetailsUpdateResponse updateUserDetails(UserDetailsUpdateRequest userDetailsUpdateRequest) throws UserUpdateFailedException;
 
     Boolean createNewUUID(UUID uuid);
 }

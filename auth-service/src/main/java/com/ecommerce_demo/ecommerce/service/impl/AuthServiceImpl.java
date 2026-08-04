@@ -13,6 +13,7 @@ import com.ecommerce_demo.ecommerce.util.UserServiceClient;
 import com.ecommerce_demo.ecommerce.util.Util;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -172,6 +173,14 @@ public class AuthServiceImpl  implements AuthService {
     public ValidateJwtResponse validateJwtToken(String header) {
         String token = header.substring(7);
         Claims claims = jwtService.extractClaims(token);
+        String email = claims.get("email", String.class);
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+
+        if(!user.isEnabled()) {
+            throw new UserDeactivatedException("User not active anymore");
+        }
 
         return ValidateJwtResponse.builder()
                 .email(claims.get("email", String.class))
