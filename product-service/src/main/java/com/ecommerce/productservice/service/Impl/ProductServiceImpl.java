@@ -1,10 +1,13 @@
 package com.ecommerce.productservice.service.Impl;
 
+import com.ecommerce.productservice.dto.request.AddProductRequest;
 import com.ecommerce.productservice.dto.request.PagingResultRequest;
+import com.ecommerce.productservice.dto.response.AddProductResponse;
 import com.ecommerce.productservice.dto.response.FetchProductResponse;
 import com.ecommerce.productservice.dto.response.PagingResultResponse;
 import com.ecommerce.productservice.entity.Product;
 import com.ecommerce.productservice.exception.FetchProductFailedException;
+import com.ecommerce.productservice.exception.ProductCreationFailedException;
 import com.ecommerce.productservice.repository.ProductRepository;
 import com.ecommerce.productservice.service.ProductService;
 import com.ecommerce.productservice.util.PaginationUtils;
@@ -14,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -71,6 +76,31 @@ public class ProductServiceImpl implements ProductService {
                 .direction(direction)
                 .sortBy(sortBy)
                 .size(size)
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public AddProductResponse createProduct(AddProductRequest request) throws ProductCreationFailedException {
+        if(productRepository.existsByName(request.getName())) {
+            throw new ProductCreationFailedException("Product already exists !!");
+        }
+
+            productRepository.save(Product.builder()
+                        .name(request.getName())
+                        .price(request.getPrice())
+                        .seller(request.getSeller())
+                        .isAvailable(request.getIsAvailable())
+                        .build());
+
+           Product newProduct = productRepository.findByName(request.getName())
+                    .orElseThrow(()-> new ProductCreationFailedException("Product creation failed"));
+
+        return AddProductResponse.builder()
+                .name(newProduct.getName())
+                .price(newProduct.getPrice())
+                .seller(newProduct.getSeller())
+                .isAvailable(newProduct.getIsAvailable())
                 .build();
     }
 }
