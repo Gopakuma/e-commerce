@@ -5,7 +5,6 @@ import com.ecommerce.productservice.dto.response.AddProductResponse;
 import com.ecommerce.productservice.dto.response.DeleteProductResponse;
 import com.ecommerce.productservice.dto.response.FetchProductResponse;
 import com.ecommerce.productservice.dto.response.PagingResultResponse;
-import com.ecommerce.productservice.entity.Product;
 import com.ecommerce.productservice.service.ProductService;
 import jakarta.ws.rs.PathParam;
 import org.springframework.data.domain.Sort;

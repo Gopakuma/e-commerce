@@ -1,5 +1,7 @@
 package com.ecommerce.productservice.service.Impl;
 
+import com.ecommerce.productservice.commons.ErrorMessageConstants;
+import com.ecommerce.productservice.commons.SuccessMessageConstants;
 import com.ecommerce.productservice.dto.request.AddProductRequest;
 import com.ecommerce.productservice.dto.request.PagingResultRequest;
 import com.ecommerce.productservice.dto.response.AddProductResponse;
@@ -37,13 +39,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public FetchProductResponse fetchProduct(Long id) throws FetchProductFailedException {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new FetchProductFailedException("Invalid Product"));
+                .orElseThrow(() -> new FetchProductFailedException(ErrorMessageConstants.PRODUCT_NOT_FOUND));
 
         return FetchProductResponse.builder()
                 .name(product.getName())
                 .price(product.getPrice())
                 .seller(product.getSeller())
                 .isAvailable(product.getIsAvailable())
+                .message(SuccessMessageConstants.FETCH_PRODUCT_SUCCESS)
                 .build();
     }
 
@@ -69,6 +72,7 @@ public class ProductServiceImpl implements ProductService {
                         .price(product.getPrice())
                         .seller(product.getSeller())
                         .isAvailable(product.getIsAvailable())
+                        .message(SuccessMessageConstants.FETCH_PRODUCT_SUCCESS)
                         .build()).toList();
 
 
@@ -85,7 +89,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public AddProductResponse createProduct(AddProductRequest request) throws ProductCreationFailedException {
         if(productRepository.existsByName(request.getName())) {
-            throw new ProductCreationFailedException("Product already exists !!");
+            throw new ProductCreationFailedException(ErrorMessageConstants.PRODUCT_EXITS);
         }
 
             productRepository.save(Product.builder()
@@ -96,13 +100,14 @@ public class ProductServiceImpl implements ProductService {
                         .build());
 
            Product newProduct = productRepository.findByName(request.getName())
-                    .orElseThrow(()-> new ProductCreationFailedException("Product creation failed"));
+                    .orElseThrow(()-> new ProductCreationFailedException(ErrorMessageConstants.PRODUCT_CREATION_FAILED));
 
         return AddProductResponse.builder()
                 .name(newProduct.getName())
                 .price(newProduct.getPrice())
                 .seller(newProduct.getSeller())
                 .isAvailable(newProduct.getIsAvailable())
+                .message(SuccessMessageConstants.PRODUCT_CREATION_SUCCESS)
                 .build();
     }
 
@@ -110,13 +115,13 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public DeleteProductResponse deleteProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(()-> new FetchProductFailedException("Invalid Product"));
+                .orElseThrow(()-> new FetchProductFailedException(ErrorMessageConstants.PRODUCT_NOT_FOUND));
 
         productRepository.deleteById(id);
 
         return DeleteProductResponse.builder()
                 .id(product.getId())
-                .message("Product deleted successfully")
+                .message(SuccessMessageConstants.PRODUCT_DELETION_SUCCESS)
                 .dateTime(LocalDateTime.now())
                 .build();
     }

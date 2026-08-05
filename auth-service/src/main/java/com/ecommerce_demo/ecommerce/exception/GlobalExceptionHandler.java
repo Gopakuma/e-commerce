@@ -1,5 +1,6 @@
 package com.ecommerce_demo.ecommerce.exception;
 
+import com.ecommerce_demo.ecommerce.common.constants.ErrorMessageConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -165,7 +166,7 @@ public class GlobalExceptionHandler {
                .timestamp(LocalDateTime.now())
                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-               .message("Something went wrong")
+               .message(ErrorMessageConstants.SERVER_ERROR)
                .path(request.getRequestURI())
                .build();
             ex.printStackTrace();

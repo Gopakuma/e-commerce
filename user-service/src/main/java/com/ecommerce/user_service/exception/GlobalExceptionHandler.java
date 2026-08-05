@@ -1,5 +1,6 @@
 package com.ecommerce.user_service.exception;
 
+import com.ecommerce.user_service.commons.ErrorMessageConstants;
 import com.ecommerce.user_service.dto.response.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -37,13 +38,13 @@ public class GlobalExceptionHandler {
 
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
-                .error(HttpStatus.UNPROCESSABLE_CONTENT.getReasonPhrase())
-                .status(HttpStatus.UNPROCESSABLE_CONTENT.value())
+                .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+                .status(HttpStatus.UNAUTHORIZED.value())
                 .message(ex.getMessage())
                 .path(request.getRequestURI())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT)
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(errorResponse);
     }
 
@@ -56,7 +57,7 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                .message("Something went wrong")
+                .message(ErrorMessageConstants.SERVER_ERROR)
                 .path(request.getRequestURI())
                 .build();
         ex.printStackTrace();

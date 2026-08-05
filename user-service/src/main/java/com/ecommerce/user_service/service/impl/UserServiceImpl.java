@@ -1,5 +1,7 @@
 package com.ecommerce.user_service.service.impl;
 
+import com.ecommerce.user_service.commons.ErrorMessageConstants;
+import com.ecommerce.user_service.commons.SuccessMessageConstants;
 import com.ecommerce.user_service.dto.request.UserDetailsUpdateRequest;
 import com.ecommerce.user_service.dto.response.UserDetailsResponse;
 import com.ecommerce.user_service.dto.response.UserDetailsUpdateResponse;
@@ -34,9 +36,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailsResponse getUserDetails(String userId, String email, String username) {
-        System.out.println("UUID received: '" + userId + "'");
         User user = userRepository.findByUuid(userId)
-                .orElseThrow(() -> new InvalidUserException("Invalid username or email"));
+                .orElseThrow(() -> new InvalidUserException(ErrorMessageConstants.INVALID_CREDENTIALS));
 
         return UserDetailsResponse.builder()
                 .email(email)
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
                 .phone(user.getPhone())
                 .address(user.getAddress())
                 .pincode(user.getPincode())
+                .message(SuccessMessageConstants.FETCH_USER_SUCCESS)
                 .build();
     }
 
@@ -57,7 +59,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return true;
         } catch (Exception e) {
-            log.error("Failed to save UUID: {}", e.getMessage());
+            System.out.println(ErrorMessageConstants.UUID_CREATION_FAILED + e.getMessage());
             return false;
         }
     }
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDetailsUpdateResponse updateUserDetails(UserDetailsUpdateRequest userDetails) {
         User currentUser = userRepository.findByUuid(userDetails.getUserId())
-                .orElseThrow(() -> new UserUpdateFailedException("Invalid User"));
+                .orElseThrow(() -> new UserUpdateFailedException(ErrorMessageConstants.USER_NOT_FOUND));
 
         currentUser.setCity(userDetails.getCity());
         currentUser.setPincode(userDetails.getPincode());
@@ -76,7 +78,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(currentUser);
 
         User updatedUser = userRepository.findByUuid(userDetails.getUserId())
-                .orElseThrow(() -> new UserUpdateFailedException("User update failed"));
+                .orElseThrow(() -> new UserUpdateFailedException(ErrorMessageConstants.USER_UPDATE_FAILED));
 
         return UserDetailsUpdateResponse.builder()
                 .email(userDetails.getEmail())
@@ -84,7 +86,7 @@ public class UserServiceImpl implements UserService {
                 .city(updatedUser.getCity())
                 .phone(updatedUser.getPhone())
                 .pincode(updatedUser.getPincode())
-                .message("User details updated successfully !!")
+                .message(SuccessMessageConstants.USER_UPDATE_SUCCESS)
                 .build();
     }
 

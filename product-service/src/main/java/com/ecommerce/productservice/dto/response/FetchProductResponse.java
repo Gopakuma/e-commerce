@@ -12,4 +12,5 @@ public class FetchProductResponse {
     private String seller;
     private Double price;
     private Boolean isAvailable;
+    private String message;
 }

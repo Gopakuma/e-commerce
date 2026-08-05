@@ -1,5 +1,7 @@
 package com.ecommerce_demo.ecommerce.service.impl;
 
+import com.ecommerce_demo.ecommerce.common.constants.ErrorMessageConstants;
+import com.ecommerce_demo.ecommerce.common.constants.SuccessMessageConstants;
 import com.ecommerce_demo.ecommerce.common.enums.Role;
 import com.ecommerce_demo.ecommerce.common.enums.TokenType;
 import com.ecommerce_demo.ecommerce.dto.request.*;
@@ -55,10 +57,10 @@ public class AuthServiceImpl  implements AuthService {
     @Override
     public RegisterResponse register(RegisterRequest registerRequest,Role role) {
         if(userRepository.existsByEmail(registerRequest.getEmail())) {
-            throw new UserAlreadyExistsException("Email already exist");
+            throw new UserAlreadyExistsException(ErrorMessageConstants.EMAIL_EXISTS);
         }
         if(userRepository.existsByUsername(registerRequest.getUsername())) {
-            throw new UserAlreadyExistsException("User Name already exist");
+            throw new UserAlreadyExistsException(ErrorMessageConstants.USERNAME_EXISTS);
         }
 
         UUID uuid = UUID.randomUUID();
@@ -66,7 +68,7 @@ public class AuthServiceImpl  implements AuthService {
         Boolean uuidStatus = userServiceClient.updateUuid(uuid);
         
         if (!uuidStatus) {
-            throw new UserRegistrationFailedException("Registration failed: The requested UUID is invalid or already taken");
+            throw new UserRegistrationFailedException(ErrorMessageConstants.UUID_EXISTS);
         }
 
         User newUser = User.builder()
@@ -87,10 +89,10 @@ public class AuthServiceImpl  implements AuthService {
                     .lastName(createdUser.getLastName())
                     .email(createdUser.getEmail())
                     .username(createdUser.getUsername())
-                    .message("User Created Successfully !!")
+                    .message(SuccessMessageConstants.USER_REGISTERED)
                     .build();
         } catch (Exception e) {
-            throw new UserRegistrationFailedException("User creation failed !!");
+            throw new UserRegistrationFailedException(ErrorMessageConstants.USER_REGISTRATION_FAILED);
         }
 
     }
@@ -98,18 +100,18 @@ public class AuthServiceImpl  implements AuthService {
     @Override
     public LoginResponse login(LoginRequest loginRequest, Role role) throws LoginFailedException {
         User user = userRepository.findByUsername(loginRequest.getUsername())
-                .orElseThrow(()-> new LoginFailedException("Invalid username or password"));
+                .orElseThrow(()-> new LoginFailedException(ErrorMessageConstants.INVALID_CREDENTIALS));
 
         if(user.getRole() != role) {
-            throw new LoginFailedException("Invalid username or password");
+            throw new LoginFailedException(ErrorMessageConstants.INVALID_CREDENTIALS);
         }
 
         if(!user.isEnabled()) {
-            throw new UserDeactivatedException("Your account has been deactivated. Please contact support.");
+            throw new UserDeactivatedException(ErrorMessageConstants.ACCOUNT_DISABLED);
         }
 
         if(!util.getPasswordEncoder().matches(loginRequest.getPassword(), user.getPassword())) {
-           throw new LoginFailedException("Invalid username or password");
+           throw new LoginFailedException(ErrorMessageConstants.INVALID_CREDENTIALS);
         }
 
         String accessToken = jwtService.generateToken(
@@ -130,6 +132,7 @@ public class AuthServiceImpl  implements AuthService {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .tokenType("Bearer")
+                .message(SuccessMessageConstants.LOGIN_SUCCESSFUL)
                 .build();
     }
 
@@ -137,20 +140,20 @@ public class AuthServiceImpl  implements AuthService {
     public RefreshTokenResponse refresh(RefreshTokenRequest refreshTokenRequest, Role role) throws RefreshTokenFailedException {
         TokenType tokenType = jwtService.extractTokenType(refreshTokenRequest.getRefreshToken());
         if(tokenType != TokenType.REFRESH){
-            throw new RefreshTokenFailedException("Invalid Token");
+            throw new RefreshTokenFailedException(ErrorMessageConstants.TOKEN_INVALID);
         }
         Claims claims = jwtService.extractClaims(refreshTokenRequest.getRefreshToken());
 
         String username = claims.getSubject();
         User user = userRepository.findByUsername(username)
-                .orElseThrow(()-> new LoginFailedException("Invalid username or password"));
+                .orElseThrow(()-> new LoginFailedException(ErrorMessageConstants.INVALID_CREDENTIALS));
 
         if(!user.isEnabled()) {
-            throw new UserDeactivatedException("Your account has been deactivated. Please contact support.");
+            throw new UserDeactivatedException(ErrorMessageConstants.ACCOUNT_DISABLED);
         }
 
         if (!jwtService.validateToken(refreshTokenRequest.getRefreshToken())) {
-            throw new RefreshTokenFailedException("Refresh Token is Invalid or Expired");
+            throw new RefreshTokenFailedException(ErrorMessageConstants.TOKEN_EXPIRED);
         }
 
         String accessToken = jwtService.generateToken(
@@ -169,6 +172,7 @@ public class AuthServiceImpl  implements AuthService {
         return RefreshTokenResponse.builder()
                 .refreshToken(refreshToken)
                 .accessToken(accessToken)
+                .message(SuccessMessageConstants.TOKEN_GENERATION_SUCCESS)
                 .build();
     }
 
@@ -180,10 +184,10 @@ public class AuthServiceImpl  implements AuthService {
         String role = claims.get("role", String.class);
 
         User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+                .orElseThrow(()-> new UsernameNotFoundException(ErrorMessageConstants.USER_NOT_FOUND));
 
         if(!user.isEnabled()) {
-            throw new UserDeactivatedException("User not active anymore");
+            throw new UserDeactivatedException(ErrorMessageConstants.ACCOUNT_DISABLED);
         }
 
         return ValidateJwtResponse.builder()
@@ -198,20 +202,20 @@ public class AuthServiceImpl  implements AuthService {
     @Transactional
     public ResetPasswordResponse resetPasswordService(ResetPasswordRequest request) throws ResetPasswordFailedException {
         User existingUser = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(()-> new ResetPasswordFailedException("Invalid email or password"));
+                .orElseThrow(()-> new ResetPasswordFailedException(ErrorMessageConstants.INVALID_CREDENTIALS));
 
         if(!passwordEncoder.matches(
                 request.getOldPassword(),
                 existingUser.getPassword())
         ){
-            throw new ResetPasswordFailedException("Invalid email or password");
+            throw new ResetPasswordFailedException(ErrorMessageConstants.INVALID_CREDENTIALS);
         }
 
         if(passwordEncoder.matches(
                 request.getNewPassword(),
                 existingUser.getPassword())
         ){
-            throw new ResetPasswordFailedException("New password should different from Old password");
+            throw new ResetPasswordFailedException(ErrorMessageConstants.INVALID_NEW_PASSWORD);
         }
 
         existingUser.setPassword(passwordEncoder.encode(request.getNewPassword()));
@@ -221,10 +225,10 @@ public class AuthServiceImpl  implements AuthService {
             return ResetPasswordResponse.builder()
                     .email(existingUser.getEmail())
                     .username(existingUser.getUsername())
-                    .message("Reset Password Successfully !")
+                    .message(SuccessMessageConstants.PASSWORD_RESET_SUCCESS)
                     .build();
         } catch (Exception ex) {
-            throw new ResetPasswordFailedException("Password Reset Failed: " + ex.getMessage());
+            throw new ResetPasswordFailedException(ErrorMessageConstants.PASSWORD_RESET_FAILED + ex.getMessage());
         }
 
     }
@@ -243,10 +247,10 @@ public class AuthServiceImpl  implements AuthService {
         int updateRows = userRepository.updateUserStatus(email, enabled);
 
         if(updateRows == 0) {
-            throw new RuntimeException("User Not Found");
+            throw new RuntimeException(ErrorMessageConstants.USER_NOT_FOUND);
         }
 
         return userRepository.findByEmail(email)
-                .orElseThrow(()-> new RuntimeException("User Not Found"));
+                .orElseThrow(()-> new RuntimeException(ErrorMessageConstants.USER_NOT_FOUND));
     }
 }

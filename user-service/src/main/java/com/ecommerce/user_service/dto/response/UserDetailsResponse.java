@@ -8,14 +8,11 @@ import lombok.Setter;
 @Setter
 @Builder
 public class UserDetailsResponse {
-
     private String username;
     private String email;
     private String phone;
     private String city;
     private String address;
     private int pincode;
-
-
-
+    private String message;
 }

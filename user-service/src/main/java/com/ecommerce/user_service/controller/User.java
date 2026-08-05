@@ -1,5 +1,6 @@
 package com.ecommerce.user_service.controller;
 
+import com.ecommerce.user_service.commons.SuccessMessageConstants;
 import com.ecommerce.user_service.dto.request.UserDetailsUpdateRequest;
 import com.ecommerce.user_service.dto.response.UserDetailsResponse;
 import com.ecommerce.user_service.dto.response.UserDetailsUpdateResponse;
@@ -63,10 +64,11 @@ public class User {
     }
     @GetMapping("/securedApi")
     public String securedApi() {
-        return "You are Authenticated";
+        return SuccessMessageConstants.AUTHENTICATION_SUCCESS;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/adminOnly")
-    public String adminOnly() {return "Hello Admin !!";}
+    public String adminOnly() {
+        return SuccessMessageConstants.AUTHORIZATION_SUCCESS;}
 }
