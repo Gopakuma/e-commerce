@@ -5,6 +5,7 @@ import com.ecommerce.user_service.dto.response.UserDetailsResponse;
 import com.ecommerce.user_service.dto.response.UserDetailsUpdateResponse;
 import com.ecommerce.user_service.service.UserService;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

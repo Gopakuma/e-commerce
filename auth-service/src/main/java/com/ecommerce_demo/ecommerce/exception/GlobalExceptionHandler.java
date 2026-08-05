@@ -3,7 +3,7 @@ package com.ecommerce_demo.ecommerce.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -122,9 +122,9 @@ public class GlobalExceptionHandler {
               .body(errorResponse);
    }
 
-   @ExceptionHandler(AccessDeniedException.class)
+   @ExceptionHandler(AuthorizationDeniedException.class)
    public ResponseEntity<ErrorResponse> handleAccessDeniedException(
-           AccessDeniedException ex,
+           AuthorizationDeniedException ex,
            HttpServletRequest request) {
 
       ErrorResponse errorResponse = ErrorResponse.builder()

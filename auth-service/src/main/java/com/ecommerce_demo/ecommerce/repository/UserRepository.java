@@ -25,6 +25,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByEnabled(boolean enabled);
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE User u SET u.enabled = :enabled WHERE u.id = :id")
-    int updateUserStatus(@Param("id") Long id, @Param("enabled") Boolean enabled);
+    @Query("UPDATE User u SET u.enabled = :enabled WHERE u.email = :email")
+    int updateUserStatus(@Param("email") String email, @Param("enabled") Boolean enabled);
 }

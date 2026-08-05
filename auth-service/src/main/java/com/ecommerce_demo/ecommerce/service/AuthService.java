@@ -21,5 +21,5 @@ public interface AuthService {
 
     List<User> fetchAllUsers(Boolean enabled);
 
-    User updateUserStatus(Long id, Boolean enabled);
+    User updateUserStatus(String email, Boolean enabled);
 }

@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.UUID;
@@ -101,6 +100,10 @@ public class AuthServiceImpl  implements AuthService {
         User user = userRepository.findByUsername(loginRequest.getUsername())
                 .orElseThrow(()-> new LoginFailedException("Invalid username or password"));
 
+        if(user.getRole() != role) {
+            throw new LoginFailedException("Invalid username or password");
+        }
+
         if(!user.isEnabled()) {
             throw new UserDeactivatedException("Your account has been deactivated. Please contact support.");
         }
@@ -174,6 +177,7 @@ public class AuthServiceImpl  implements AuthService {
         String token = header.substring(7);
         Claims claims = jwtService.extractClaims(token);
         String email = claims.get("email", String.class);
+        String role = claims.get("role", String.class);
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
@@ -186,7 +190,7 @@ public class AuthServiceImpl  implements AuthService {
                 .email(claims.get("email", String.class))
                 .username(claims.getSubject())
                 .uuid(claims.get("uuid", String.class))
-                .role(Role.valueOf(claims.get("role", String.class)))
+                .role(Role.valueOf(role))
                 .build();
     }
 
@@ -234,15 +238,15 @@ public class AuthServiceImpl  implements AuthService {
     }
 
     @Override
-    public User updateUserStatus(@RequestParam("Id") Long id, @RequestParam("enabled") Boolean enabled ) {
+    public User updateUserStatus(String email, Boolean enabled ) {
 
-        int updateRows = userRepository.updateUserStatus(id, enabled);
+        int updateRows = userRepository.updateUserStatus(email, enabled);
 
         if(updateRows == 0) {
             throw new RuntimeException("User Not Found");
         }
 
-        return userRepository.findById(id)
+        return userRepository.findByEmail(email)
                 .orElseThrow(()-> new RuntimeException("User Not Found"));
     }
 }

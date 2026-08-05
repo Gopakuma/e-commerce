@@ -3,6 +3,7 @@ package com.ecommerce.productservice.service.Impl;
 import com.ecommerce.productservice.dto.request.AddProductRequest;
 import com.ecommerce.productservice.dto.request.PagingResultRequest;
 import com.ecommerce.productservice.dto.response.AddProductResponse;
+import com.ecommerce.productservice.dto.response.DeleteProductResponse;
 import com.ecommerce.productservice.dto.response.FetchProductResponse;
 import com.ecommerce.productservice.dto.response.PagingResultResponse;
 import com.ecommerce.productservice.entity.Product;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -101,6 +103,21 @@ public class ProductServiceImpl implements ProductService {
                 .price(newProduct.getPrice())
                 .seller(newProduct.getSeller())
                 .isAvailable(newProduct.getIsAvailable())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public DeleteProductResponse deleteProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(()-> new FetchProductFailedException("Invalid Product"));
+
+        productRepository.deleteById(id);
+
+        return DeleteProductResponse.builder()
+                .id(product.getId())
+                .message("Product deleted successfully")
+                .dateTime(LocalDateTime.now())
                 .build();
     }
 }

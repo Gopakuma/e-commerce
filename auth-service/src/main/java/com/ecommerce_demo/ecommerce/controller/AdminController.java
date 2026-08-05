@@ -55,8 +55,8 @@ public class AdminController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/updateUser")
-    public ResponseEntity<User> updateUserStatus(@RequestParam("Id") Long id, @RequestParam("enabled") Boolean enabled) {
-        User response = authService.updateUserStatus(id, enabled);
+    public ResponseEntity<User> updateUserStatus(@RequestParam("email") String email, @RequestParam("enabled") Boolean enabled) {
+        User response = authService.updateUserStatus(email, enabled);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
