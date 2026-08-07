@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class RefreshTokenResponse {
-    private String refreshToken;
     private String accessToken;
     private String message;
 }

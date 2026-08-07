@@ -132,13 +132,15 @@ services:
   startup-message:
     image: alpine
     depends_on:
+      eureka-server:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
       gateway-service:
         condition: service_healthy
       auth-service:
         condition: service_healthy
       user-service:
-        condition: service_healthy
-      eureka-server:
         condition: service_healthy
       product-service:
         condition: service_healthy

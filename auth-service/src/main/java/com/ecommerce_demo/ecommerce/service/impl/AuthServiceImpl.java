@@ -12,7 +12,6 @@ import com.ecommerce_demo.ecommerce.repository.UserRepository;
 import com.ecommerce_demo.ecommerce.security.JwtService;
 import com.ecommerce_demo.ecommerce.service.AuthService;
 import com.ecommerce_demo.ecommerce.util.UserServiceClient;
-import com.ecommerce_demo.ecommerce.util.Util;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,8 +27,6 @@ public class AuthServiceImpl  implements AuthService {
 
     private final UserRepository userRepository;
 
-    private final Util util;
-
     private final JwtService jwtService;
 
     private final UserServiceClient userServiceClient;
@@ -43,12 +40,10 @@ public class AuthServiceImpl  implements AuthService {
 
     public AuthServiceImpl(
             UserRepository userRepository,
-            Util util,
             JwtService jwtService,
             UserServiceClient userServiceClient, PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
-        this.util = util;
         this.jwtService = jwtService;
         this.userServiceClient = userServiceClient;
         this.passwordEncoder = passwordEncoder;
@@ -75,7 +70,7 @@ public class AuthServiceImpl  implements AuthService {
                 .uuid(uuid.toString())
                 .firstName(registerRequest.getFirstName())
                 .lastName(registerRequest.getLastName())
-                .password(util.encodePassword(registerRequest.getPassword()))
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
                 .role(role)
@@ -110,7 +105,7 @@ public class AuthServiceImpl  implements AuthService {
             throw new UserDeactivatedException(ErrorMessageConstants.ACCOUNT_DISABLED);
         }
 
-        if(!util.getPasswordEncoder().matches(loginRequest.getPassword(), user.getPassword())) {
+        if(!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
            throw new LoginFailedException(ErrorMessageConstants.INVALID_CREDENTIALS);
         }
 
@@ -128,9 +123,11 @@ public class AuthServiceImpl  implements AuthService {
                 role
                 );
 
+        user.setRefreshToken(refreshToken);
+        userRepository.save(user);
+
         return LoginResponse.builder()
                 .accessToken(accessToken)
-                .refreshToken(refreshToken)
                 .tokenType("Bearer")
                 .message(SuccessMessageConstants.LOGIN_SUCCESSFUL)
                 .build();
@@ -138,13 +135,21 @@ public class AuthServiceImpl  implements AuthService {
 
     @Override
     public RefreshTokenResponse refresh(RefreshTokenRequest refreshTokenRequest, Role role) throws RefreshTokenFailedException {
-        TokenType tokenType = jwtService.extractTokenType(refreshTokenRequest.getRefreshToken());
-        if(tokenType != TokenType.REFRESH){
+        TokenType tokenType = jwtService.extractTokenType(refreshTokenRequest.getAccessToken());
+
+        if(tokenType != TokenType.ACCESS){
             throw new RefreshTokenFailedException(ErrorMessageConstants.TOKEN_INVALID);
         }
-        Claims claims = jwtService.extractClaims(refreshTokenRequest.getRefreshToken());
+
+        Claims claims = jwtService.extractClaims(refreshTokenRequest.getAccessToken());
 
         String username = claims.getSubject();
+        String requestRole = claims.get("Role", String.class);
+
+        if(!requestRole.equals(role.name())) {
+            throw new RefreshTokenFailedException(ErrorMessageConstants.ACCESS_DENIED);
+        }
+
         User user = userRepository.findByUsername(username)
                 .orElseThrow(()-> new LoginFailedException(ErrorMessageConstants.INVALID_CREDENTIALS));
 
@@ -152,8 +157,8 @@ public class AuthServiceImpl  implements AuthService {
             throw new UserDeactivatedException(ErrorMessageConstants.ACCOUNT_DISABLED);
         }
 
-        if (!jwtService.validateToken(refreshTokenRequest.getRefreshToken())) {
-            throw new RefreshTokenFailedException(ErrorMessageConstants.TOKEN_EXPIRED);
+        if (!jwtService.validateToken(user.getRefreshToken())) {
+            throw new RefreshTokenFailedException(ErrorMessageConstants.REFRESH_TOKEN_EXPIRED);
         }
 
         String accessToken = jwtService.generateToken(
@@ -169,8 +174,10 @@ public class AuthServiceImpl  implements AuthService {
                 TokenType.REFRESH,
                 role
                 );
+        user.setRefreshToken(refreshToken);
+        userRepository.save(user);
+
         return RefreshTokenResponse.builder()
-                .refreshToken(refreshToken)
                 .accessToken(accessToken)
                 .message(SuccessMessageConstants.TOKEN_GENERATION_SUCCESS)
                 .build();

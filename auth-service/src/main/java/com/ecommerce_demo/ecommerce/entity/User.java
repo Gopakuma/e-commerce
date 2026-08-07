@@ -47,6 +47,9 @@ public class User {
     @Builder.Default
     private boolean enabled = true;
 
+    @Column(name = "refresh_token", length = 1024)
+    private String refreshToken;
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
