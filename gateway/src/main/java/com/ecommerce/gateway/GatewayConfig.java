@@ -46,25 +46,6 @@ public class GatewayConfig implements GlobalFilter {
             return exchange.getResponse().setComplete();
         }
 
-        return authServiceClient
-                .get()
-                .uri("lb://auth-service/auth/validateUser")
-                .header(HttpHeaders.AUTHORIZATION, token)
-                .retrieve()
-                .bodyToMono(ValidateJwtResponse.class)
-                .flatMap(response ->{
-                    ServerHttpRequest request = exchange.getRequest().mutate()
-                            .header("X-User-Id", response.getUuid())
-                            .header("X-User-Email", response.getEmail())
-                            .header("X-Username", response.getUsername())
-                            .header("X-User-Role", response.getRole().name())
-                            .build();
-                 return chain.filter(exchange.mutate().request(request).build());
-                })
-                .onErrorResume(ex -> {
-                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                    ex.printStackTrace();
-                    return exchange.getResponse().setComplete();
-                });
+        return WebClientServices.authService(exchange, chain, token);
     }
 }
