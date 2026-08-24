@@ -61,6 +61,9 @@ eureka:
     prefer-ip-address: true
 
 management:
+  health:
+    circuit-breakers:
+      enabled: true
   endpoints:
     web:
       exposure:
@@ -70,3 +73,14 @@ logging:
   level:
     org.springframework.cloud.gateway: TRACE
     org.springframework.cloud.loadbalancer: TRACE
+
+resilience4j:
+  circuit-breaker:
+    instances:
+      authService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3

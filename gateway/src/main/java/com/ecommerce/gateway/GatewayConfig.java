@@ -1,23 +1,22 @@
 package com.ecommerce.gateway;
 
-import com.ecommerce.gateway.dto.ValidateJwtResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Component
 public class GatewayConfig implements GlobalFilter {
 
-    private final WebClient authServiceClient;
+    private final WebClientServices webClientServices;
 
-    public GatewayConfig(WebClient.Builder builder) {
-        this.authServiceClient = builder.build();
+    public GatewayConfig(WebClientServices webClientServices) {
+        this.webClientServices = webClientServices;
     }
 
 
@@ -46,6 +45,6 @@ public class GatewayConfig implements GlobalFilter {
             return exchange.getResponse().setComplete();
         }
 
-        return WebClientServices.authService(exchange, chain, token);
+        return webClientServices.authService(exchange, chain, token);
     }
 }
