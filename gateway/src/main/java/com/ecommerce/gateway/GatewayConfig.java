@@ -1,23 +1,22 @@
 package com.ecommerce.gateway;
 
-import com.ecommerce.gateway.dto.ValidateJwtResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Component
 public class GatewayConfig implements GlobalFilter {
 
-    private final WebClient authServiceClient;
+    private final WebClientServices webClientServices;
 
-    public GatewayConfig(WebClient.Builder builder) {
-        this.authServiceClient = builder.build();
+    public GatewayConfig(WebClientServices webClientServices) {
+        this.webClientServices = webClientServices;
     }
 
 
@@ -46,25 +45,6 @@ public class GatewayConfig implements GlobalFilter {
             return exchange.getResponse().setComplete();
         }
 
-        return authServiceClient
-                .get()
-                .uri("lb://auth-service/auth/validateUser")
-                .header(HttpHeaders.AUTHORIZATION, token)
-                .retrieve()
-                .bodyToMono(ValidateJwtResponse.class)
-                .flatMap(response ->{
-                    ServerHttpRequest request = exchange.getRequest().mutate()
-                            .header("X-User-Id", response.getUuid())
-                            .header("X-User-Email", response.getEmail())
-                            .header("X-Username", response.getUsername())
-                            .header("X-User-Role", response.getRole().name())
-                            .build();
-                 return chain.filter(exchange.mutate().request(request).build());
-                })
-                .onErrorResume(ex -> {
-                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                    ex.printStackTrace();
-                    return exchange.getResponse().setComplete();
-                });
+        return webClientServices.authService(exchange, chain, token);
     }
 }

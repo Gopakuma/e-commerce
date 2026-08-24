@@ -7,7 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 
 @Configuration
-public class AuthServiceWebClient {
+public class ServiceWebClient {
 
     @Bean
     @LoadBalanced
