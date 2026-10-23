@@ -12,6 +12,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+      start_period: 60s
 
   postgres-db:
     image: postgres:15-alpine
@@ -19,11 +20,12 @@ services:
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=ecommerce
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./init-db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ecommerce-network
     healthcheck:
@@ -31,6 +33,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+      start_period: 60s
 
   gateway-service:
     build: ./gateway
@@ -44,12 +47,13 @@ services:
       - ecommerce-network
     depends_on:
       eureka-server:
-        condition: service_started
+        condition: service_healthy
     healthcheck:
-      test: [ "CMD", "wget", "--spider", "-q", "http://eureka-server:8761/" ]
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8080/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 10
+      start_period: 60s
 
   auth-service:
     build: ./auth-service
@@ -58,15 +62,19 @@ services:
     ports:
       - "8081:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecom-authservice
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_EXPIRATION=${JWT_ACCESS_EXPIRATION}
+      - JWT_REFRESH_EXPIRATION=${JWT_REFRESH_EXPIRATION}
     healthcheck:
       test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8080/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 10
+      start_period: 60s
     depends_on:
       postgres-db:
         condition: service_healthy
@@ -84,15 +92,16 @@ services:
     ports:
       - "8082:8081"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecom-userservice
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     healthcheck:
       test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8081/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 10
+      start_period: 60s
     depends_on:
       postgres-db:
         condition: service_healthy
@@ -110,15 +119,16 @@ services:
     ports:
       - "8083:8082"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ecom-productservice
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     healthcheck:
       test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8082/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 10
+      start_period: 60s
     depends_on:
       postgres-db:
         condition: service_healthy
