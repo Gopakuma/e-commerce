@@ -4,11 +4,12 @@ server:
 spring:
   application:
     name: auth-service
+  environment: [ JAVA_TOOL_OPTIONS=-Xmx256m ]
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ecom-authservice}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -18,9 +19,9 @@ spring:
     show-sql: on
 
 jwt:
-  secret: secretKey123secretKeysecret123KeysecretKey123
-  access_expiration: 900000
-  refresh_expiration: 172800000
+  secret: ${JWT_SECRET}
+  access_expiration: ${JWT_ACCESS_EXPIRATION}
+  refresh_expiration: ${JWT_REFRESH_EXPIRATION}
 
 eureka:
   client:
@@ -44,3 +45,4 @@ management:
         include: health
 
 debug: false
+

@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: API-GATEWAY-SERVICE
+  environment: [ JAVA_TOOL_OPTIONS=-Xmx256m ]
   cloud:
     gateway:
       server:
@@ -71,8 +72,11 @@ management:
 
 logging:
   level:
-    org.springframework.cloud.gateway: TRACE
-    org.springframework.cloud.loadbalancer: TRACE
+    root: INFO
+    org.springframework.cloud.gateway: INFO
+    org.springframework.cloud.loadbalancer: INFO
+    com.netflix: WARN
+
 
 resilience4j:
   circuit-breaker:
